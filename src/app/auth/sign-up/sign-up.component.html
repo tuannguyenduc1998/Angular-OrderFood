@@ -1,0 +1,85 @@
+<section class="auth">
+  <div class="container">
+    <div class="auth-popup row">
+      <div  class="banner col-md-6 m-0 p-0 position-relative">
+        <img src="../../../assets/banner-login.jpg" alt="" class="banner-bg">
+      </div>
+      <div class="content col-md-6">
+        <div class="form">
+          <h1 class="text-center text-uppercase">Đăng kí</h1>
+          <div class="d-flex">
+            <form [formGroup]="signUpForm" class="form-content" (ngSubmit)="onSubmit()">
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i nz-icon nzType="user" nzTheme="outline"></i></span>
+                  </div>
+                  <input class="form-control" type="text" placeholder="Tên tài khoản (Username) (*)" formControlName="userName"
+                    [class.is-invalid]="formErrors?.userName">
+                </div>
+                <p class="warning text-danger">{{formErrors?.userName}}</p>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i nz-icon nzType="user" nzTheme="outline"></i></span>
+                  </div>
+                  <input class="form-control" type="text" placeholder="Người lập tài khoản? (Your full name) (*)" formControlName="fullName"
+                    [class.is-invalid]="formErrors?.fullName">
+                </div>
+                <p class="warning text-danger">{{formErrors?.fullName}}</p>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i nz-icon nzType="mail" nzTheme="outline"></i> </span>
+                  </div>
+                  <input class="form-control" type="email" placeholder="Email (*)" formControlName="email"
+                    [class.is-invalid]="formErrors?.email">
+                </div>
+                <p class="warning text-danger">{{formErrors?.email}}</p>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i nz-icon nzType="key" nzTheme="outline"></i></span>
+                  </div>
+                  <input class="form-control" type="password" placeholder="Mật khẩu (Password) (*)" formControlName="password"
+                    [class.is-invalid]="formErrors?.password">
+                </div>
+                <p class="warning text-danger">{{formErrors?.password}}</p>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i nz-icon nzType="key" nzTheme="outline"></i></span>
+                  </div>
+                  <input class="form-control" type="password" placeholder="Nhập lại mật khẩu (Confirm password )(*)" formControlName="verifyPassword"
+                    [class.is-invalid]="formErrors?.verifyPassword">
+                </div>
+                <p class="warning text-danger">{{formErrors?.verifyPassword}}</p>
+                <p class="warning text-danger">{{formErrors?.mustMatch}}</p>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 input-group">
+                  <button class="form-control color-btn" type="submit">Đăng ký</button>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <a class="d-flex justify-content-center" href="auth/sign-in">Bạn đã có tài khoản? - Đăng nhập tại đây</a>
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                  <p class="font-italic mt-1"> (Have got account already? Sign in here) </p>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

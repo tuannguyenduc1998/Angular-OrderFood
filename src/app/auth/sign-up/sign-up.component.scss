@@ -1,0 +1,96 @@
+h1 {
+  color:  rgb(59, 143, 112);
+  margin-bottom: 1rem;
+  font-weight:bold;
+  font-family:'Muli';
+  font-size: 20px;
+}
+
+button:focus{
+outline:none;
+}
+
+.color-btn{
+background-color: rgb(59, 143, 112);
+color: white;
+border: none;
+}
+
+.auth{
+background-color: rgb(175, 175, 175);
+}
+
+.form{
+background-color: white;
+}
+
+.wrapper {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-column-gap: 10px;
+grid-row-gap: 1em;
+}
+
+.account-type{
+background-color: rgb(245, 245, 245);
+opacity: 0.5;
+cursor: pointer;
+}
+.active{
+background-color: rgb(59, 143, 112);
+opacity: 1;
+color: #ffffff;
+cursor: pointer;
+}
+
+.auth {
+background: url('/assets/bg-login-page.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+height: 100%;
+overflow: auto;
+.container {
+  padding: 0 6.7rem;
+}
+.auth-popup{
+    background: white;
+    min-height: 100%;
+    .banner{
+      .title-area {
+        bottom: 0;
+        left:21px;
+      }
+        &-bg{
+          height: 100%;
+          width: 100%;
+        }
+        min-height: 400px;
+    }
+    .content {
+        .form{
+          padding-top: 50px;
+          padding-bottom: 30px;
+            .form-content{
+              margin: 0 20px;
+              padding-bottom: 10px;
+                width: 100%;
+            }
+            .icon{
+                color: #A9A9A9;
+            }
+            &-input {
+              background-color: transparent;
+              border: none;
+              border-bottom: 1px solid #d5d5d5;
+              font-size: 16px;
+
+            }
+        }
+    }
+}
+}

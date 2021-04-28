@@ -1,0 +1,19 @@
+<div class="row col-md-12 header mx-0">
+  <div class="col-md-8 d-flex justify-content-start">
+    <img src="../../../../assets/logo.png" class="logo m-1 ml-5">
+  </div>
+  <div class="col-md-4 d-flex justify-content-end align-items-center">
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      <a>
+        {{user.fullName}}
+        <i nz-icon nzType="down" class="mb-6"></i>
+      </a>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu class="mt-1">
+        <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
+        <li nz-menu-item (click)="logOut()">Đăng xuất</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</div>

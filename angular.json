@@ -25,10 +25,17 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/theme.less",
+              "src/styles.scss",
+              "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },
@@ -43,7 +50,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -123,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Angular-OrderFood"
+    }
+  },
+  "defaultProject": "Angular-OrderFood",
+  "cli": {
+    "analytics": "4397cc3d-79d2-4b1b-9052-a3c950932cc2"
+  }
 }
