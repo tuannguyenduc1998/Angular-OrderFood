@@ -1,2 +1,66 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<!-- <app-header></app-header> -->
+<nz-layout>
+  <nz-sider nzCollapsible>
+    <div class="d-flex justify-content-center">
+      <img src="../../../../assets/logo.png" class="logo m-3 pointer" [routerLink]="['/home']">
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="User" nzIcon="user">
+        <ul>
+          <li nz-menu-item [routerLink]="['/dashboard/management-user']" nz-tooltip
+            nzTooltipTitle="Danh sách người dùng">Danh sách người dùng</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Cửa hàng" nzIcon="hdd">
+        <ul>
+          <li nz-menu-item [routerLink]="['/dashboard/management-store']">Danh sách cửa hàng</li>
+          <li nz-submenu nzTitle="Báo cáo">
+            <ul>
+              <li nz-menu-item nz-tooltip nzTooltipTitle="Doanh thu theo cửa hàng">Doanh thu theo cửa hàng</li>
+              <li nz-menu-item nz-tooltip nzTooltipTitle="Doanh thu theo sản phẩm">Doanh thu theo sản phẩm</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Đơn hàng" nzIcon="book">
+        <ul>
+          <li nz-menu-item>Danh sách đơn hàng</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="file"></i>
+        <span>File</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header class="p-0">
+      <div class="d-flex justify-content-end align-items-center">
+        <ng-container *ngIf="user">
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          <a>
+            {{user.fullName}}
+            <i nz-icon nzType="down" class="mb-6"></i>
+          </a>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu class="mt-1">
+            <li nz-menu-item>Thay đổi mật khẩu</li>
+            <li nz-menu-item>Đăng xuất</li>
+          </ul>
+        </nz-dropdown-menu>
+      </ng-container>
+      <ng-container *ngIf="!user">
+        <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
+      </ng-container>
+      <i nz-icon class="home mx-4 pointer" nzType="home" nzTheme="outline" [routerLink]="['/home']"></i>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

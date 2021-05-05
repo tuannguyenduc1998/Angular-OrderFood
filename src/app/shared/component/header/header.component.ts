@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationModel } from '../../models/auth/authentication.model';
 import { AuthenticationService } from '../../services/authentication.service';
 
@@ -10,14 +11,25 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class HeaderComponent implements OnInit {
 
   user: AuthenticationModel;
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.user = this.authenticationService.getAuthenticationModel();
   }
 
   logOut(): void{
+    this.authenticationService.logOut();
+    this.router.navigate([`/home`]);
+  }
 
+  storeManager(): void{
+    if (this.user)
+    {
+      this.router.navigate([`/home/store-manager/store`]);
+    }
+    else{
+      this.router.navigate([`/auth/sign-in`]);
+    }
   }
 
   changePassword(): void{

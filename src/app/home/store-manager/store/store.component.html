@@ -1,0 +1,65 @@
+<form #form [formGroup]="storeForm" class="form-content" *ngIf="storeForm" (ngSubmit)="onSubmit()">
+  <div class="row mx-0 align-items">
+    <div class="col-md-6 px-0 d-flex align-items-center justify-content-start">
+      <h4 class="text-uppercase font-weight-bold mb-0">
+        Thông tin cửa hàng
+      </h4>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end px-0">
+      <button nz-button nzType="primary" type="submit" class="text-uppercase align-items-center">
+        Lưu
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group row">
+    <label class="col-md-12">Tên cửa hàng</label>
+    <div class="col-md-12 input-group">
+      <input nz-input class="form-control" type="text" formControlName="storeName"
+        [class.is-invalid]="formErrors?.storeName">
+    </div>
+    <p class="warning text-danger">{{formErrors?.storeName}}</p>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-md-12">Chủ cửa hàng</label>
+    <div class="col-md-12 input-group">
+      <input nz-input class="form-control" type="text" formControlName="storeOwner"
+        [class.is-invalid]="formErrors?.storeOwner" [disabled]="true">
+    </div>
+    <p class="warning text-danger">{{formErrors?.storeOwner}}</p>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-12">Ảnh đại diện</label>
+    <div class="upload-image col-md-12">
+      <input #upload class="upload" type='file' (change)="onSelectFile($event)" name="avatar"
+        accept=".jpg, .jpeg, .png">
+      <div class="display-img" *ngIf="store.storeAvatar">
+        <img [src]="url + store.storeAvatar" class="img">
+        <i class="icon-delete-image" nz-icon nzType="close" nzTheme="outline" (click)="removeImg()"></i>
+      </div>
+      <ng-container *ngIf="!store.storeAvatar">
+        <div class="perspective-image" (click)="upload.click()">
+          <i nz-icon nzType="file-add" nzTheme="outline"></i>
+        </div>
+      </ng-container>
+    </div>
+    <p class="warning text-danger">{{formErrors?.storeAvatar}}</p>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-12">Địa chỉ</label>
+    <div class="col-md-12 input-group">
+      <input nz-input class="form-control" type="text" formControlName="storeAddress"
+        [class.is-invalid]="formErrors?.storeAddress">
+    </div>
+    <p class="warning text-danger">{{formErrors?.storeAddress}}</p>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-12">Trạng thái</label>
+    <div class="col-md-12 input-group">
+      <input nz-input class="form-control" type="text" formControlName="storeState" [disabled]
+        [class.is-invalid]="formErrors?.storeState">
+    </div>
+    <p class="warning text-danger">{{formErrors?.storeState}}</p>
+  </div>
+</form>

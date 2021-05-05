@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseData } from '../models/response.model';
@@ -14,6 +14,16 @@ export class BaseService {
 
   get apiEndpoint(): string {
     return environment.API_ENDPOINT_LOCAL;
+  }
+
+  private loggedInStatus = JSON.parse(localStorage.getItem('OrderFoodApi'));
+  getHeaders(): any{
+    // const httpOptions = {
+    //   headers: new HttpHeaders({ 'Content-Type': type , Authorization:
+    //   `Bearer ${this.loggedInStatus.accessToken}`})
+    // };
+    const httpOptions = new HttpHeaders().set( 'Authorization', `Bearer ${this.loggedInStatus.accessToken}`);
+    return httpOptions;
   }
 
   public get<T>(url: string, params?: any, headers?: any): Observable<any> {

@@ -17,7 +17,7 @@ export class AuthenticationService extends BaseService implements CanActivate {
     if (this.getAuthenticationModel()) {
       return true;
     }
-    this.router.navigate(['/auth/sign-in'], {
+    this.router.navigate(['/home'], {
       queryParams: { returnUrl: state.url }
     });
     return false;
@@ -28,6 +28,10 @@ export class AuthenticationService extends BaseService implements CanActivate {
        password
      };
      return this.post<any>('/api/accounts/login', requestModel);
+   }
+
+   public logOut(): void{
+     localStorage.removeItem(localStorageKey);
    }
 
    public setAuthenticationModel(authenticationModel: any): string{

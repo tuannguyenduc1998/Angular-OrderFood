@@ -55,7 +55,6 @@ html {
 }
 
 .perspective-image {
-  margin: 5px;
   width: 60px;
   height: 60px;
   border: #cccccc 2px dashed;
@@ -73,9 +72,6 @@ html {
   display: flex;
 
   .display-img {
-    margin: 5px;
-    width: 60px;
-    height: 60px;
     border: 1px solid #ced4da;
     border-radius: 8px;
     position: relative;
@@ -122,3 +118,7 @@ html {
 .border-radius{
   border-radius: 10px;
 }
+
+.visibility-hidden {
+  visibility: hidden;
+  }

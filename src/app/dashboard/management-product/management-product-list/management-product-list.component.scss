@@ -1,0 +1,43 @@
+.search-area {
+  min-width: 18rem;
+}
+
+.table-content {
+  .table-col {
+    // &-stt {
+    //   width: 3rem;
+    //   border-left: 1px solid #eaeaea;
+    // }
+    &-name {
+      width: 14rem;
+    }
+    &-owner {
+      width: 18rem;
+    }
+    &-address {
+      width: 18rem;
+    }
+    &-avatar {
+      width: 10rem;
+    }
+    &-status {
+      width: 10rem;
+    }
+    &-manipulation {
+      width: 10rem;
+    }
+  }
+  .edit-active {
+    color: rgb(56, 199, 0);
+  }
+}
+::ng-deep {
+  nz-select {
+    min-width: 160px;
+  }
+}
+
+// .bg-content{
+//   background: #fff;
+//   padding: 24px;
+// }

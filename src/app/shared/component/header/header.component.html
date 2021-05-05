@@ -1,8 +1,14 @@
 <div class="row col-md-12 header mx-0">
   <div class="col-md-8 d-flex justify-content-start">
-    <img src="../../../../assets/logo.png" class="logo m-1 ml-5">
+    <img src="../../../../assets/logo.png" class="logo m-2 ml-5 pointer" [routerLink]="['/home']">
+    <div class="d-flex align-items-center">
+      <a class="ml-3" (click)="storeManager()">Quản lý của hàng</a>
+      <a class="ml-3" (click)="storeManager()">Đơn hàng của bạn</a>
+      <a class="ml-3" (click)="storeManager()">Món đã chọn</a>
+    </div>
   </div>
   <div class="col-md-4 d-flex justify-content-end align-items-center">
+    <!-- <ng-container *ngIf="user; else">
     <a nz-dropdown [nzDropdownMenu]="menu">
       <a>
         {{user.fullName}}
@@ -11,9 +17,39 @@
     </a>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu class="mt-1">
+        <ng-container *ngIf='user'>
+          <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
+        </ng-container>
         <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
         <li nz-menu-item (click)="logOut()">Đăng xuất</li>
       </ul>
     </nz-dropdown-menu>
+  </ng-container>
+  <ng-container *ngIf="!user">
+    <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
+  </ng-container> -->
+
+  <ng-container *ngIf="user; else userNull">
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      <a>
+        {{user.fullName}}
+        <i nz-icon nzType="down" class="mb-6"></i>
+      </a>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu class="mt-1">
+        <ng-container *ngIf='user'>
+          <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
+        </ng-container>
+        <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
+        <li nz-menu-item (click)="logOut()">Đăng xuất</li>
+      </ul>
+    </nz-dropdown-menu>
+  </ng-container>
+  <ng-template #userNull>
+    <div>
+      <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
+    </div>
+  </ng-template>
   </div>
 </div>

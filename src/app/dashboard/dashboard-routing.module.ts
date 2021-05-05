@@ -15,6 +15,14 @@ const routes: Routes = [
       {
         path: 'management-user',
         loadChildren: () => import('./management-user/management-user.module').then(mod => mod.ManagementUserModule)
+      },
+      {
+        path: 'management-store',
+        loadChildren: () => import('./management-store/management-store.module').then(mod => mod.ManagementStoreModule)
+      },
+      {
+        path: 'management-product',
+        loadChildren: () => import('./management-product/management-product.module').then(mod => mod.ManagementProductModule)
       }
     ]
   }

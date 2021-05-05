@@ -13,19 +13,19 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class UserService extends BaseService {
-  private loggedInStatus = JSON.parse(localStorage.getItem('OrderFoodApi'));
+  // private loggedInStatus = JSON.parse(localStorage.getItem('OrderFoodApi'));
   constructor(private httpClient: HttpClient) {
     super(httpClient);
    }
 
-  getHttpOptions(): any{
-    // const httpOptions = {
-    //   headers: new HttpHeaders({ 'Content-Type': type , Authorization:
-    //   `Bearer ${this.loggedInStatus.accessToken}`})
-    // };
-    const httpOptions = new HttpHeaders().set( 'Authorization', `Bearer ${this.loggedInStatus.accessToken}`);
-    return httpOptions;
-  }
+  // getHttpOptions(): any{
+  //   // const httpOptions = {
+  //   //   headers: new HttpHeaders({ 'Content-Type': type , Authorization:
+  //   //   `Bearer ${this.loggedInStatus.accessToken}`})
+  //   // };
+  //   const httpOptions = new HttpHeaders().set( 'Authorization', `Bearer ${this.loggedInStatus.accessToken}`);
+  //   return httpOptions;
+  // }
   public registerUser(formSignUp: Register): Observable<Register>{
     const requestModel = {
       userName: formSignUp.userName,
@@ -55,7 +55,7 @@ export class UserService extends BaseService {
     if (!paramsFilter.keyWord) {
       delete paramsFilter.keyWord;
     }
-    const httpOptions = this.getHttpOptions();
+    const httpOptions = this.getHeaders();
     return this.get(
       `/api/users/list-user-paging`,
       Utils.createFilterParam({ ...paramsFilter }), httpOptions
