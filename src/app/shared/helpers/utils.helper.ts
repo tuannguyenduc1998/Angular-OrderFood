@@ -12,4 +12,8 @@ export default class Utils{
     }
     return merge({}, filter);
   }
+
+  static renderIndex(index: number, pageSize: number, pageIndex: number ): number{
+    return index + pageSize * (pageIndex - 1) + 1;
+  }
 }

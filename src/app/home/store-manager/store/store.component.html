@@ -25,7 +25,7 @@
     <label class="col-md-12">Chủ cửa hàng</label>
     <div class="col-md-12 input-group">
       <input nz-input class="form-control" type="text" formControlName="storeOwner"
-        [class.is-invalid]="formErrors?.storeOwner" [disabled]="true">
+        [class.is-invalid]="formErrors?.storeOwner" [readonly]="true">
     </div>
     <p class="warning text-danger">{{formErrors?.storeOwner}}</p>
   </div>
@@ -57,8 +57,8 @@
   <div class="form-group row">
     <label class="col-md-12">Trạng thái</label>
     <div class="col-md-12 input-group">
-      <input nz-input class="form-control" type="text" formControlName="storeState" [disabled]
-        [class.is-invalid]="formErrors?.storeState">
+      <input nz-input class="form-control" type="text" formControlName="storeState"
+        [class.is-invalid]="formErrors?.storeState" [readonly]="true">
     </div>
     <p class="warning text-danger">{{formErrors?.storeState}}</p>
   </div>

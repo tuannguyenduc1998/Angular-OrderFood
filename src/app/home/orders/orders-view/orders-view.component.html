@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="my-3">
+    <h4 class="text-uppercase font-weight-bold primary-color mb-0">
+      đơn hàng của bạn
+    </h4>
+  </div>
+  <hr>
+  <div class="row">
+  <ng-container *ngFor="let item of orders">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <div class="avatar-store">
+          <img [src]="url + item.store.storeAvatar" alt="">
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title">{{item.store.storeName}}</h5>
+          <p class="card-text">{{item.orderDate | date: 'dd/MM/yyyy hh:mm'}}</p>
+          <h6 class="card-subtitle">{{convertState(item.orderState)}} #{{item.orderCode}}</h6>
+          <a [routerLink]="['/home/orders/detail', item.id]" class="btn btn-primary btn-view-detail mt-2">Xem chi tiết</a>
+        </div>
+        <div class="card-footer row mx-0">
+          <div class="item col-md-4 text-center">
+            <p>{{item.totalPrice | currency: 'VND'}}</p>
+            <h6>Tổng tiền</h6>
+          </div>
+          <div class="item col-md-4 text-center">
+            <p>{{item.totalAmount ? item.totalAmount : 0}}</p>
+            <h6>Tổng số</h6>
+          </div>
+          <div class="item col-md-4 text-center">
+            <p>{{item.totalProduct ? item.totalProduct : 0}}</p>
+            <h6>Món</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+</div>

@@ -31,18 +31,6 @@ grid-column-gap: 10px;
 grid-row-gap: 1em;
 }
 
-.account-type{
-background-color: rgb(245, 245, 245);
-opacity: 0.5;
-cursor: pointer;
-}
-.active{
-background-color: rgb(59, 143, 112);
-opacity: 1;
-color: #ffffff;
-cursor: pointer;
-}
-
 .auth {
 background: url('/assets/bg-login-page.jpg');
 background-repeat: no-repeat;

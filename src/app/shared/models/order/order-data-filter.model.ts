@@ -4,3 +4,11 @@ export class OrderDataFilter{
   keyWord: string;
   storeId: string;
 }
+
+export class UserOrderDataFilter{
+  page: number;
+  pageSize: number;
+  keyWord: string;
+  userId: string;
+  productId: string;
+}

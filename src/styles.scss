@@ -3,11 +3,6 @@
   box-sizing: border-box;
 }
 
-.icon-eye{
-  color: #f5bc11;
-  cursor: pointer;
-}
-
 .form-control {
     font-size: 13px;
 }
@@ -24,30 +19,12 @@ button {
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
-.color-btn1{
-  background-color: rgb(59, 143, 112);
-  color: white;
-  border: none;
-}
-.color-btn2{
-  color:  rgb(59, 143, 112);
-  border: none;
-}
-
 html {
   font-size: 13px;
 }
 
-.backrooll{
-  cursor: pointer;
-}
-
 .font{
   font-family: 'Times New Roman', Times, serif;
-}
-
-.note{
-  color: red;
 }
 
 .upload{

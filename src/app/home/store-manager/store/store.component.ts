@@ -46,9 +46,6 @@ export class StoreComponent implements OnInit {
       {
         this.store = res;
       }
-      else{
-        this.store = this.mappingStore();
-      }
       this.createForm();
     });
   }
@@ -63,16 +60,16 @@ export class StoreComponent implements OnInit {
       });
   }
 
-  mappingStore(): StoreSummaryModel{
-    return {
-      id: '',
-      storeName: '',
-      storeOwner: this.userLogin.userId,
-      storeAvatar: '',
-      storeAddress: '',
-      storeState: false
-    };
-  }
+  // mappingStore(): StoreSummaryModel{
+  //   return {
+  //     id: '',
+  //     storeName: '',
+  //     user: this.userLogin.userId,
+  //     storeAvatar: '',
+  //     storeAddress: '',
+  //     storeState: false
+  //   };
+  // }
 
   mappingModel(form): any{
     if (this.store.id)

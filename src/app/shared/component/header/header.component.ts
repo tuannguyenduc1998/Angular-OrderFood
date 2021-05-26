@@ -32,6 +32,26 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  userOrderManager(): void{
+    if (this.user)
+    {
+      this.router.navigate([`/home/user-orders`]);
+    }
+    else{
+      this.router.navigate([`/auth/sign-in`]);
+    }
+  }
+
+  orderManager(): void{
+    if (this.user)
+    {
+      this.router.navigate([`/home/orders`]);
+    }
+    else{
+      this.router.navigate([`/auth/sign-in`]);
+    }
+  }
+
   changePassword(): void{
 
   }

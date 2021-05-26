@@ -1,0 +1,14 @@
+.avatar-store img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-view-detail{
+width: 100%;
+}
+
+.card-footer{
+.item:not(:last-child){
+  border-right: 1px solid #ccc;
+}
+}

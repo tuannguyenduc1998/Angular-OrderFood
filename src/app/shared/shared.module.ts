@@ -12,26 +12,12 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { SwiperConfigInterface, SwiperModule, SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { RouterModule } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  speed: 800,
-  slidesPerView: 4,
-  slidesPerColumn: 1,
-  slidesPerGroup: 2,
-  spaceBetween: 20,
-  grabCursor: false,
-    autoplay: {
-      delay: 3000
-    },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
-  }
-};
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,10 +36,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NzMenuModule,
     NzDropDownModule,
     NzCardModule,
-    SwiperModule,
     NzLayoutModule,
     NzBreadCrumbModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzInputNumberModule,
+    NzModalModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -69,17 +56,13 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NzMenuModule,
     NzDropDownModule,
     NzCardModule,
-    SwiperModule,
     RouterModule,
     NzLayoutModule,
     NzBreadCrumbModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzInputNumberModule,
+    NzModalModule
   ],
-  providers: [
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
-  ]
+  providers: [],
 })
 export class SharedModule { }

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="my-3">
+    <h4 class="text-uppercase font-weight-bold primary-color mb-0">
+      thông tin đơn hàng
+    </h4>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12 col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title font-20">Chi tiết đơn hàng</div>
+          <hr>
+          <div class="card-list">
+            <ng-container *ngFor="let item of products">
+            <div class="item-list p-2 font-16">
+              <div class="avatar">
+                <img src="../../../../assets/banner-login.jpg" alt="">
+              </div>
+              <div class="info-product-user ml-3">
+                <div class="product-name">
+                  {{item.productName}}
+                </div>
+                <div class="username">
+                  {{item.price | currency: 'VND'}}
+                </div>
+              </div>
+              <button class="btn btn-success my-2 font-16">
+                -
+              </button>
+              <button class="btn btn-primary mx-3 my-2 btn-amount font-16">
+                {{checkExsitProduct(item.id)}}
+              </button>
+              <button class="btn btn-outline-danger my-2 font-16">
+                +
+              </button>
+            </div>
+          </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+    </div>
+  </div>
+</div>

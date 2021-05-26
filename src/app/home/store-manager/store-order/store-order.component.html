@@ -1,4 +1,4 @@
-<div class="row mx-0 align-items">
+<div class="row mx-0">
   <div class="d-flex align-items-center">
     <h4 class="text-uppercase font-weight-bold primary-color mb-0">
       danh sách đơn hàng
@@ -19,17 +19,13 @@
             </button>
           </ng-template>
         </div>
-        <!-- <button nz-button nzType="primary" type="click"
-            class="text-uppercase d-flex align-items-center justify-content-center ml-1" (click)="filterUserList()">
-            <i nz-icon nzType="undo" nzTheme="outline"></i>
-          </button> -->
       </div>
     </div>
   </div>
 </div>
 <div class="h-100 w-100 table-content pt-3">
   <nz-table #basicTable nzBordered nzShowSizeChanger [nzFrontPagination]="false" [nzData]="orders"
-    (nzPageIndexChange)="changePageIndex($event)" (nzPageSizeChange)="changPageSize($event)" [nzLoading]="false"
+    (nzPageIndexChange)="changePageIndex($event)" (nzPageSizeChange)="changePageSize($event)" [nzLoading]="false"
     [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzScroll]="{ x: '1100px' }">
     <thead>
       <tr>
@@ -56,11 +52,10 @@
     <tbody>
       <tr *ngFor="let item of basicTable.data; let i = index">
         <td class="text-center">{{renderIndex(i)}}</td>
-        <td>{{item.createUser}}</td>
-        <td>{{convertTime(item.createDate) | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.user.fullName}}</td>
+        <td>{{convertTime(item.orderDate) | date: 'dd/MM/yyyy'}}</td>
         <td>{{item.totalPrice | currency: 'VND'}}</td>
-        <td>{{item.orderState}}</td>
-        <!-- <td>{{item.isHidden ? 'Không hoạt động' : 'Hoạt động'}}</td> -->
+        <td>{{convertState(item.orderState)}}</td>
         <td nzRight>
           <div class="d-flex justify-content-center align-items-center">
               <div class="active-switch pointer" aria-hidden="true" nz-tooltip nzTooltipTitle="Thay đổi trạng thái">

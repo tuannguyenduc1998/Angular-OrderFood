@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row mx-0 my-3">
+    <div class="d-flex align-items-center">
+      <h4 class="text-uppercase font-weight-bold primary-color mb-0">
+        danh sách món đã chọn
+      </h4>
+    </div>
+    <div class="mx-0 ml-auto d-flex">
+      <div class="ml-auto d-flex flex-wrap w-100">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex form-inline pl-0 pr-0">
+          <div class="search-area mx-1" nz-tooltip [nzTooltipTitle]="'Tìm theo tên, email'">
+            <nz-input-group class="search" nzSearch [nzAddOnAfter]="suffixButton">
+              <input type="text" nz-input [placeholder]="
+                    'Tìm theo tên, email'
+                  " (keyup)="searchTerm$.next($event.target.value)" [value]="searchTerm$.value" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSearch>
+                <i nz-icon nzType="search"></i>
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-100 w-100 table-content">
+    <nz-table #basicTable nzBordered nzShowSizeChanger [nzFrontPagination]="false" [nzData]="userOrders"
+      (nzPageIndexChange)="changePageIndex($event)" (nzPageSizeChange)="changePageSize($event)" [nzLoading]="false"
+      [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzScroll]="{ x: '1100px' }">
+      <thead>
+        <tr>
+          <th class="table-col-name text-center">
+            <p class="mb-0">STT</p>
+          </th>
+          <th class="table-col-product">
+            <p class="mb-0">Món</p>
+          </th>
+          <th class="table-col-owner">
+            <p class="mb-0">Người tạo</p>
+          </th>
+          <th class="table-col-code">
+            <p class="mb-0">Mã đơn</p>
+          </th>
+          <th class="table-col-address">
+            <p class="mb-0">Ngày tạo</p>
+          </th>
+          <th class="table-col-amount">
+            <p class="mb-0">Số lượng</p>
+          </th>
+          <th class="table-col-price">
+            <p class="mb-0">Đơn giá</p>
+          </th>
+          <th class="table-col-totalPrice">
+            <p class="mb-0">Thành tiền</p>
+          </th>
+          <th class="table-col-status">
+            <p class="mb-0">Trạng thái đơn</p>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of basicTable.data; let i = index">
+          <td class="text-center">{{renderIndex(i)}}</td>
+          <td>{{item.product.productName}}</td>
+          <td>{{item.user.fullName}}</td>
+          <td>{{item.orderCode}}</td>
+          <td>{{convertTime(item.orderDate) | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.price | currency: 'VND'}}</td>
+          <td>{{item.price * item.amount | currency: 'VND'}}</td>
+          <td>{{convertState(item.orderState)}}</td>
+          <!-- <td>{{item.isHidden ? 'Không hoạt động' : 'Hoạt động'}}</td> -->
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

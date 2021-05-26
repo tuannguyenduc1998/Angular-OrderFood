@@ -26,11 +26,11 @@ export class ProductFormComponent implements OnInit {
   store: StoreSummaryModel = new StoreSummaryModel();
   invalidMessages: string[] = [];
   formErrors = {
-    storeId: '',
+    store: '',
     productName: '',
     price: '',
     isHidden: '',
-    categoryId: ''
+    category: ''
   };
   constructor(
     private productService: ProductService,
@@ -48,7 +48,7 @@ export class ProductFormComponent implements OnInit {
       forkJoin([
         this.productService.getAllCategory(),
         this.productService.getProductById(this.id),
-        this.storeService.getStoreByUserId(this.userLogin.userId)
+        this.storeService.getStoreByUserId(this.userLogin.userId),
       ]).subscribe(([res1, res2, res3]) => {
         this.categories = res1;
         this.product = res2;
@@ -71,11 +71,10 @@ export class ProductFormComponent implements OnInit {
 
   createForm(): void {
     this.productForm = this.formBuilder.group({
-      storeId: [this.store.storeName, Validators.required],
+      store: [this.store.storeName , Validators.required],
       productName: [this.product.productName, Validators.required],
       price: [this.product.price, Validators.required],
-      isHidden: [this.product.isHidden ? 'Chưa kích hoạt' : 'Kích hoạt', Validators.required],
-      categoryId: [this.product.categoryId, Validators.required]
+      category: [this.product.category, Validators.required]
     });
   }
 
@@ -93,8 +92,8 @@ export class ProductFormComponent implements OnInit {
       productName: '',
       price: +'',
       isHidden: false,
-      storeId: this.store.id,
-      categoryId: ''
+      store: this.store,
+      category: null
     };
   }
 
@@ -113,7 +112,7 @@ export class ProductFormComponent implements OnInit {
         storeId: this.store.id,
         productName: form.productName,
         price: form.price,
-        categoryId: form.categoryId
+        categoryId: form.category.id
       };
     }
   }
@@ -129,7 +128,7 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  compareDataCategory(o1, o2): boolean {
-    return o1 && o2 ? o1.toString() === o2.toString() : o1 === o2;
+  compareData(o1, o2): boolean {
+    return o1 && o2 ? o1.id.toString() === o2.id.toString() : o1 === o2;
   }
 }

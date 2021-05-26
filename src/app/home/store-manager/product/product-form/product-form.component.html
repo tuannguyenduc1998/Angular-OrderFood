@@ -11,17 +11,18 @@
   <div class="form-group row">
     <label class="col-md-12">Cửa hàng</label>
     <div class="col-md-12 input-group">
-      <input nz-input class="form-control" type="text" formControlName="storeId"
-        [class.is-invalid]="formErrors?.storeId" [disabled]="true">
+      <input nz-input class="form-control" type="text" formControlName="store"
+        [class.is-invalid]="formErrors?.store" [readonly]="true">
     </div>
-    <p class="warning text-danger">{{formErrors?.storeId}}</p>
+    <p class="warning text-danger">{{formErrors?.store}}</p>
   </div>
 
   <div class="form-group row">
     <label class="col-md-12">Giá tiền</label>
     <div class="col-md-12 input-group">
-      <input nz-input class="form-control" type="text" formControlName="price"
-        [class.is-invalid]="formErrors?.price" [disabled]="true">
+      <nz-input-number class="form-control" type="text" formControlName="price"
+        [class.is-invalid]="formErrors?.price" [nzMin]="0">
+      </nz-input-number>
     </div>
     <p class="warning text-danger">{{formErrors?.price}}</p>
   </div>
@@ -29,19 +30,11 @@
   <div class="form-group row">
     <label class="col-md-12">Danh mục</label>
     <div class="col-md-12 input-group">
-      <nz-select class="w-100" formControlName="categoryId" name="group" nzShowSearch nzAllowClear nzPlaceHolder="-Chọn-"
-              [compareWith]="compareDataCategory">
-              <nz-option *ngFor="let item of categories" [nzLabel]="item.categoryName" [nzValue]="item.id">
+      <nz-select class="w-100" formControlName="category" name="category" nzShowSearch nzAllowClear nzPlaceHolder="-Chọn-"
+              [compareWith]="compareData">
+              <nz-option *ngFor="let item of categories" [nzLabel]="item.categoryName" [nzValue]="item">
               </nz-option>
             </nz-select>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-12">Trạng thái</label>
-    <div class="col-md-12 input-group">
-      <input nz-input class="form-control" type="text" formControlName="isHidden" [disabled]
-        [class.is-invalid]="formErrors?.isHidden">
-    </div>
-    <p class="warning text-danger">{{formErrors?.isHidden}}</p>
   </div>
 </form>

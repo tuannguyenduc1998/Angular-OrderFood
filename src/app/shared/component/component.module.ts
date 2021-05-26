@@ -7,12 +7,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-
+import { AddOrderPopupComponent } from './popups/add-order-popup/add-order-popup.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AddOrderPopupComponent
   ],
   imports: [
     CommonModule,
@@ -20,11 +22,15 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
     NzIconModule,
     NzButtonModule,
     RouterModule,
-    NzLayoutModule
+    NzLayoutModule,
+    NzModalModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent
+  ],
+  entryComponents: [
+    AddOrderPopupComponent
   ]
 })
 export class ComponentModule { }

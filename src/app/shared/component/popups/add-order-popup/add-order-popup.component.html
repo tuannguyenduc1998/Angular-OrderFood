@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="my-3">
+    <h4 class="text-uppercase font-weight-bold primary-color mb-0">
+      thông tin sản phẩm
+    </h4>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12 col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title font-20">Chi tiết sản phẩm</div>
+          <hr>
+          <div class="card-list">
+            <ng-container *ngFor="let item of listProduct; let i = index">
+            <div class="item-list p-2 font-16">
+              <div class="avatar">
+                <img src="../../../../assets/banner-login.jpg" alt="">
+              </div>
+              <div class="info-product-user ml-3">
+                <div class="product-name">
+                  {{item.product.productName}}
+                </div>
+                <div class="price">
+                  {{item.product.price | currency: 'VND'}}
+                </div>
+              </div>
+              <button [disabled]="item.amount === 0" class="btn btn-success my-2 font-16" (click)="decreaseAmount(item, i)">
+                -
+              </button>
+              <input type="text" class="mx-3 my-2 btn-amount font-16" [value]="item.amount" readonly>
+              <button class="btn btn-outline-danger my-2 font-16" (click)="increaseAmount(item, i)">
+                +
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!listProduct.length">
+            <h5 class="text-center">Không còn sản phẩm nào trong cửa hàng!</h5>
+          </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary" (click)="onAdd()">Thêm vào đơn hàng</button>
+    <button nz-button nzType="default" (click)="actionCancel()">Hủy</button>
+  </div>
+</div>

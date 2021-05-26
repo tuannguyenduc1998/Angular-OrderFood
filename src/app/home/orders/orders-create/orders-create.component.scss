@@ -1,0 +1,22 @@
+.font-16 {
+  font-size: 16px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.avatar {
+  img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+}
+
+.item-list {
+  display: flex;
+  .info-product-user {
+    flex: 1;
+  }
+}

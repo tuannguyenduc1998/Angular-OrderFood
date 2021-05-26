@@ -19,7 +19,7 @@ export class ProductService extends BaseService {
 
   public listProductPaging(
     params: ProductDataFilter
-  ): Observable<PagePagination<ProductModel>> {
+  ): Observable<PagePagination<ProductSummaryModel>> {
     const paramsFilter: ProductDataFilter = { ...params };
     if (!paramsFilter.page) {
       delete paramsFilter.page;
@@ -47,6 +47,10 @@ export class ProductService extends BaseService {
 
   public getProductById(productId): Observable<ProductSummaryModel>{
     return this.get<ProductSummaryModel>(`/api/products/${productId}`);
+  }
+
+  public getProductByStoreId(storeId): Observable<ProductSummaryModel[]>{
+    return this.get<ProductSummaryModel[]>(`/api/products/${storeId}/store`);
   }
 
   public createOrUpdate(productForm): Observable<any>{

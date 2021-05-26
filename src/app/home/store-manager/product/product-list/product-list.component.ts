@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AuthenticationModel } from 'src/app/shared/models/auth/authentication.model';
 import { ProductDataFilter } from 'src/app/shared/models/product/product-data-filter.model';
-import { ProductModel } from 'src/app/shared/models/product/product.model';
+import { ProductModel, ProductSummaryModel } from 'src/app/shared/models/product/product.model';
 import { StoreSummaryModel } from 'src/app/shared/models/store/store.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
 
   filterModel: ProductDataFilter = new ProductDataFilter();
   userLogin: AuthenticationModel;
-  products: ProductModel[];
+  products: ProductSummaryModel[];
   store: StoreSummaryModel;
   searchTerm$ = new BehaviorSubject('');
   pageIndex = 1;

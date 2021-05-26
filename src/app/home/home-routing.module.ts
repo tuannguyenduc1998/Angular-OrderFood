@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { IndexComponent } from './index/index.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,15 @@ const routes: Routes = [
       {
         path: 'store-manager',
         loadChildren: () => import('./store-manager/store-manager.module').then(mod => mod.StoreManagerModule)
-      }
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule)
+      },
+      {
+        path: 'user-orders',
+        component: UserOrdersComponent
+      },
     ]
   }
 ];

@@ -16,8 +16,8 @@ export class StoreService extends BaseService {
     super(httpClient);
   }
 
-  public getAllStore(): Observable<any[]> {
-    return this.get<any[]>('/api/stores/get-all-store').pipe(
+  public getAllStore(): Observable<StoreSummaryModel[]> {
+    return this.get<StoreSummaryModel[]>('/api/stores/get-all-store').pipe(
       map((result: any) => {
         return result;
       })

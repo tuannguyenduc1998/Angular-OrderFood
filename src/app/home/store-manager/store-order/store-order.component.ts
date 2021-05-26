@@ -3,7 +3,7 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AuthenticationModel } from 'src/app/shared/models/auth/authentication.model';
 import { OrderDataFilter } from 'src/app/shared/models/order/order-data-filter.model';
-import { OrderSummaryModel } from 'src/app/shared/models/order/order.model';
+import { OrderDetailSummaryModel, OrderSummaryModel } from 'src/app/shared/models/order/order.model';
 import { StoreSummaryModel } from 'src/app/shared/models/store/store.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { OrderService } from 'src/app/shared/services/order.service';
@@ -19,6 +19,8 @@ export class StoreOrderComponent implements OnInit {
   userLogin: AuthenticationModel;
   filterModel: OrderDataFilter = new OrderDataFilter();
   store: StoreSummaryModel;
+  orderDetails: OrderDetailSummaryModel[];
+  totalPrice = 0;
   searchTerm$ = new BehaviorSubject('');
   pageIndex = 1;
   pageSize = 5;
@@ -54,7 +56,7 @@ export class StoreOrderComponent implements OnInit {
       });
   }
 
-  changPageSize(event: number): void {
+  changePageSize(event: number): void {
     this.filterModel.pageSize = event;
     this.filterModel.page = 1;
     this.filterListOrder();
@@ -71,5 +73,17 @@ export class StoreOrderComponent implements OnInit {
   convertTime(date: Date): number{
     const timeSpandate = new Date(date).getTime();
     return timeSpandate;
+  }
+
+  convertState(state: number): string{
+    if (state === 0){
+      return 'Đã hủy đơn';
+    }
+    if (state === 1){
+      return 'Đang tạo đơn';
+    }
+    if (state === 2){
+      return 'Đã chốt đơn';
+    }
   }
 }
