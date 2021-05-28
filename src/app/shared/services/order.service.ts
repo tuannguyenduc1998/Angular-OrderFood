@@ -87,12 +87,24 @@ export class OrderService extends BaseService {
     return this.get<OrderSummaryModel>(`/api/orders/${id}`);
   }
 
+  public getOrderByStoreIdAndUserId(storeId, userId): Observable<OrderSummaryModel>{
+    const params = {
+      storeId,
+      userId
+    };
+    return this.get<OrderSummaryModel>(`/api/orders/get-order-by-order-and-user`, params, this.getHeaders());
+  }
+
   public getOrderDetailsByOrderId(orderId: string): Observable<OrderDetailSummaryModel[]>{
     return this.get<OrderDetailSummaryModel[]>(`/api/orders/${orderId}/orderdetail`);
   }
 
   public updateOrderDetail(orderForm): Observable<any>{
     return this.put<any>(`/api/orders/update`, orderForm, this.getHeaders());
+  }
+
+  public createOrder(orderForm): Observable<any>{
+    return this.post<any>(`/api/orders/create`, orderForm, this.getHeaders());
   }
 
   public addOrderDetails(orderForm: OrderDetailModel[]): Observable<OrderDetailModel[]>{
@@ -104,6 +116,13 @@ export class OrderService extends BaseService {
 
   public deleteOrderDetail(orderIdAndProductId): Observable<any>{
     return this.delete<any>(`/api/orders/delete-orderdetail`, orderIdAndProductId, this.getHeaders());
+  }
+
+  public deleteAllOrderDetail(listOrderDetail): Observable<any[]>{
+    const orderDetailsFrom = {
+      orderDetails: listOrderDetail
+    };
+    return this.delete<any[]>(`/api/orders/delete-all-orderdetail`, orderDetailsFrom, this.getHeaders());
   }
 
   public changeStatus(changeForm): Observable<any>{

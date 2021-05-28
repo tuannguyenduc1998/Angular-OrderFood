@@ -66,4 +66,8 @@ export class StoreService extends BaseService {
       return this.post<any>(`/api/stores/create`, storeForm, this.getHeaders());
     }
   }
+
+  public getStoreByStoreId(storeId: string): Observable<StoreSummaryModel> {
+    return this.get<StoreSummaryModel>(`/api/stores/${storeId}`);
+  }
 }

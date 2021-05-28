@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {
   OrderDetailModel,
   OrderDetailSummaryModel,
   OrderSummaryModel,
 } from 'src/app/shared/models/order/order.model';
+import { ProductDataFilter } from 'src/app/shared/models/product/product-data-filter.model';
 import { ProductSummaryModel } from 'src/app/shared/models/product/product.model';
 import { StoreSummaryModel } from 'src/app/shared/models/store/store.model';
 import { OrderService } from 'src/app/shared/services/order.service';
@@ -26,6 +28,8 @@ export class AddOrderPopupComponent implements OnInit {
   productAmount = 0;
   listProduct = [];
   arrProduct: any[] = [];
+  searchTerm$ = new BehaviorSubject('');
+  filterModel: ProductDataFilter = new ProductDataFilter();
   constructor(
     private productService: ProductService,
     private modal: NzModalRef,
@@ -34,17 +38,24 @@ export class AddOrderPopupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService
-      .getProductByStoreId(this.order.store.id)
-      .subscribe((result) => {
-        this.orderDetails.forEach((x) => this.productDetail.push(x.product.id));
-        this.products = result.filter(
-          (x) => this.productDetail.includes(x.id) === false
-        );
-        this.products.map((item) => {
-          this.listProduct.push({ product: item, amount: 0 });
-        });
+    this.searchTerm$.pipe(debounceTime(200)).subscribe((_) => {
+      this.filterModel.keyWord = this.searchTerm$.value.trim();
+      this.filterProduct();
+    });
+  }
+
+  filterProduct(): void {
+    this.filterModel.storeId = this.order.store.id;
+    const filter = { ...this.filterModel };
+    this.productService.getListProductByStoreId(filter).subscribe((result) => {
+      this.orderDetails.forEach((x) => this.productDetail.push(x.product.id));
+      this.products = result.filter(
+        (x) => this.productDetail.includes(x.id) === false
+      );
+      this.products.map((item) => {
+        this.listProduct.push({ product: item, amount: 0 });
       });
+    });
   }
 
   decreaseAmount(item, i): void {
@@ -80,8 +91,7 @@ export class AddOrderPopupComponent implements OnInit {
   }
 
   onAdd(): void {
-    if (this.arrProduct.length > 0)
-    {
+    if (this.arrProduct.length > 0) {
       // tslint:disable-next-line:prefer-const
       let orderForm: OrderDetailModel[] = [];
       for (const x of [...this.arrProduct]) {
@@ -90,17 +100,22 @@ export class AddOrderPopupComponent implements OnInit {
           productId: x.product.id,
           amount: x.amount,
           price: x.product.price * x.amount,
-          orderDetailNote: ''
+          orderDetailNote: '',
         };
         orderForm.push(orderDetail);
       }
       this.orderService.addOrderDetails(orderForm).subscribe((res) => {
-        if (res){
-          this.nzNotificationService.success('Thông báo', 'Thêm sản phẩm vào đơn hàng thành công!');
-          this.modal.destroy({isSuccess: true});
-        }
-        else {
-          this.nzNotificationService.error('Thông báo', 'Có lỗi xảy. Vui lòng kiểm tra lại!');
+        if (res) {
+          this.nzNotificationService.success(
+            'Thông báo',
+            'Thêm sản phẩm vào đơn hàng thành công!'
+          );
+          this.modal.destroy({ isSuccess: true });
+        } else {
+          this.nzNotificationService.error(
+            'Thông báo',
+            'Có lỗi xảy. Vui lòng kiểm tra lại!'
+          );
         }
       });
     }

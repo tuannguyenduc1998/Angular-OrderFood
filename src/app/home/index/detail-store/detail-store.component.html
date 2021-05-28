@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row mx-0 my-3">
+    <div class="col-md-5 px-0">
+      <img [src]="url + store?.storeAvatar" alt="" class="avatar-store">
+    </div>
+    <div class="col-md-7">
+      <h1 class="name-store">{{store?.storeName}}</h1>
+      <div class="address-store">{{store?.storeAddress}}</div>
+      <span class="status-store">{{store?.storeState ? 'Mở cửa' : 'Đóng cửa'}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="menu-store pb-5">
+  <div class="container">
+    <div class="menu-store-tab py-3 pl-5">
+      <h4 class="name-tab text-uppercase font-16 font-weight-bold">thực đơn</h4>
+    </div>
+    <div class="menu-store-content row">
+      <div class="categories col-md-2 pr-0">
+        <div class="card">
+          <div class="card-body">
+            <ul *ngFor="let category of categories" class="list-unstyled">
+              <li class="text-uppercase">{{category.categoryName}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="list-product col-md-7">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-md-12 py-3 px-2">
+              <div class="search-area" nz-tooltip [nzTooltipTitle]="'Tìm theo tên sản phẩm'">
+                <nz-input-group class="" nzSearch [nzAddOnAfter]="suffixButton">
+                  <input class="font-16" type="text" nz-input [placeholder]="
+                      'Tìm theo tên sản phẩm'
+                    " (keyup)="searchTerm$.next($event.target.value)" [value]="searchTerm$.value" />
+                </nz-input-group>
+                <ng-template #suffixButton>
+                  <button nz-button nzType="primary" nzSearch>
+                    <i nz-icon nzType="search" class="font-16"></i>
+                  </button>
+                </ng-template>
+              </div>
+            </div>
+            <ng-container *ngFor="let item of products; let i = index">
+              <div class="item-list p-2 font-16">
+                <div class="avatar">
+                  <img src="../../../../assets/banner-login.jpg" alt="">
+                </div>
+                <div class="info-product-user ml-3">
+                  <h2 class="product-name font-16 font-weight-bold">
+                    {{item.productName}}
+                  </h2>
+                </div>
+                <div class="price d-flex align-items-center mr-3 font-16 font-weight-bold">
+                  {{item.price | currency: 'VND'}}
+                </div>
+                <button class="adding-food-cart btn btn-danger my-2 font-16" (click)="increaseAmount(item)">
+                  <div class="btn-adding">+</div>
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!products?.length">
+              <h5 class="text-center">Không có sản phẩm nào trong cửa hàng!</h5>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="list-order col-md-3 pl-0">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="username text-center">{{user?.email}}</h4>
+          </div>
+          <div class="card-body p-2">
+            <ng-container *ngFor="let item of orderDetails; let i = index">
+              <div class="delete-all-orderdetail d-flex justify-content-end">
+                <a class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
+              </div>
+
+              <div class="item-order row">
+                <div class="info-product-order col-md-8">
+                  <div class="product-name font-13 font-weight-bold">
+                    {{item.product.productName}}
+                  </div>
+                  <div class="price font-13">
+                    {{item.price | currency: 'VND'}}
+                  </div>
+                </div>
+                <div class="btn-group col-md-4">
+                  <a class="btn-descrease" (click)="decreaseAmount(item.product, item.amount)">
+                    <i class="fas fa-minus-circle"></i>
+                  </a>
+                  <span>{{item.amount}}</span>
+                  <a class="btn-incease" (click)="increaseAmount(item.product)">
+                    <i class="fas fa-plus-circle"></i>
+                  </a>
+                </div>
+                <div class="note col-md-12">
+                  <input type="text" placeholder="Thêm ghi chú" class="border-0 font-13">
+                </div>
+              </div>
+              <hr>
+            </ng-container>
+            <div class="card-price text-center d-flex justify-content-between">
+              <span class="text">Tổng cộng: </span>
+              <span class="price text-primary font-weight-bold">{{totalPrice | currency: 'VND'}}</span>
+            </div>
+          </div>
+          <div class="card-footer row mx-0">
+            <a class="col-md-12 text-center btn btn-danger font-16">
+              <i class="fas fa-check-circle"></i>
+              Đặt hàng
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

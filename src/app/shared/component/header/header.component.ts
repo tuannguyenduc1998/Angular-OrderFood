@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   logOut(): void{
     this.authenticationService.logOut();
     this.router.navigate([`/home`]);
+    this.user = this.authenticationService.getAuthenticationModel();
   }
 
   storeManager(): void{

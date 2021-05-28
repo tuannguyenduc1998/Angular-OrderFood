@@ -24,19 +24,19 @@ export class OrdersCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.router.snapshot.paramMap.get('id');
-    forkJoin([
-      this.orderService.getOrdersById(this.id),
-      this.orderService.getOrderDetailsByOrderId(this.id),
-    ]).subscribe(([res1, res2]) => {
-      this.order = res1;
-      this.orderDetails = res2;
-      this.productService
-        .getProductByStoreId(this.order.store.id)
-        .subscribe((result) => {
-          this.products = result;
-        });
-    });
+    // this.id = this.router.snapshot.paramMap.get('id');
+    // forkJoin([
+    //   this.orderService.getOrdersById(this.id),
+    //   this.orderService.getOrderDetailsByOrderId(this.id),
+    // ]).subscribe(([res1, res2]) => {
+    //   this.order = res1;
+    //   this.orderDetails = res2;
+    //   this.productService
+    //     .getListProductByStoreId(this.order.store.id)
+    //     .subscribe((result) => {
+    //       this.products = result;
+    //     });
+    // });
   }
 
   checkExsitProduct(productId): number{

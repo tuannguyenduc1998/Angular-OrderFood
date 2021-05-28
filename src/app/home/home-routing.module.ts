@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'index',
-        component: IndexComponent
+        loadChildren: () => import('./index/index.module').then(mod => mod.IndexModule)
       },
       {
         path: 'store-manager',

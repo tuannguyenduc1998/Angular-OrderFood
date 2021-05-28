@@ -49,8 +49,12 @@ export class ProductService extends BaseService {
     return this.get<ProductSummaryModel>(`/api/products/${productId}`);
   }
 
-  public getProductByStoreId(storeId): Observable<ProductSummaryModel[]>{
-    return this.get<ProductSummaryModel[]>(`/api/products/${storeId}/store`);
+  public getListProductByStoreId(params: ProductDataFilter): Observable<ProductSummaryModel[]>{
+    const paramsFilter: ProductDataFilter = { ...params };
+    if (!paramsFilter.keyWord){
+      delete paramsFilter.keyWord;
+    }
+    return this.get<ProductSummaryModel[]>(`/api/products/list-product-by-storeid`, {...paramsFilter});
   }
 
   public createOrUpdate(productForm): Observable<any>{

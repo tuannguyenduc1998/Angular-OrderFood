@@ -1,0 +1,12 @@
+<div class="content col-md-12 mt-3">
+  <div class="form row">
+    <div class="col-md-4 p-4" *ngFor='let item of stores'>
+      <nz-card nzHoverable [nzCover]="coverTemplate">
+        <nz-card-meta [routerLink]="['/home/index/detail-store', item.id]" nzTitle={{item.storeName}} nzDescription={{item.storeAddress}}></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img alt="example" [src]="url + item.storeAvatar" />
+      </ng-template>
+    </div>
+  </div>
+</div>
