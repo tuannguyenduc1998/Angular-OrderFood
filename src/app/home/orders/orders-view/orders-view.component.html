@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
   <div class="my-3">
     <h4 class="text-uppercase font-weight-bold primary-color mb-0">
       đơn hàng của bạn
@@ -16,7 +16,7 @@
           <h5 class="card-title">{{item.store.storeName}}</h5>
           <p class="card-text">{{item.orderDate | date: 'dd/MM/yyyy hh:mm'}}</p>
           <h6 class="card-subtitle">{{convertState(item.orderState)}} #{{item.orderCode}}</h6>
-          <a [routerLink]="['/home/orders/detail', item.id]" class="btn btn-primary btn-view-detail mt-2">Xem chi tiết</a>
+          <a [routerLink]="['/orders/detail', item.id]" class="btn btn-primary btn-view-detail mt-2">Xem chi tiết</a>
         </div>
         <div class="card-footer row mx-0">
           <div class="item col-md-4 text-center">

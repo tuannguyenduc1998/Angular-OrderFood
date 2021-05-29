@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
         .login(this.formSignIn.value.username, this.formSignIn.value.password)
         .subscribe((result) => {
           this.authenticationService.setAuthenticationModel(result);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         });
     } else {
       alert('Tài khoản hoặc hoặc mật khẩu không đúng');

@@ -17,15 +17,24 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: ProductListComponent
+        component: ProductListComponent,
+        data: {
+          title: 'Product-list'
+        }
       },
       {
         path: 'create',
-        component: ProductCreateComponent
+        component: ProductCreateComponent,
+        data: {
+          title: 'Product-create'
+        }
       },
       {
         path: 'edit/:id',
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        data: {
+          title: 'Product-edit'
+        }
       }
     ]
   }

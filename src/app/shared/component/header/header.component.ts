@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AuthenticationModel } from '../../models/auth/authentication.model';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,23 +12,30 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user: AuthenticationModel;
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  userLogin: AuthenticationModel;
+  user: any;
+  url = environment.API_ENDPOINT_LOCAL;
+  constructor(private authenticationService: AuthenticationService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getAuthenticationModel();
+    this.userLogin = this.authenticationService.getAuthenticationModel();
+    if (this.userLogin){
+      this.userService.getUserById(this.userLogin.userId).subscribe((result) => {
+        this.user = result;
+      });
+    }
   }
 
   logOut(): void{
     this.authenticationService.logOut();
-    this.router.navigate([`/home`]);
-    this.user = this.authenticationService.getAuthenticationModel();
+    this.router.navigate([`/`]);
+    this.userLogin = this.authenticationService.getAuthenticationModel();
   }
 
   storeManager(): void{
-    if (this.user)
+    if (this.userLogin)
     {
-      this.router.navigate([`/home/store-manager/store`]);
+      this.router.navigate([`/store-manager/store`]);
     }
     else{
       this.router.navigate([`/auth/sign-in`]);
@@ -34,9 +43,9 @@ export class HeaderComponent implements OnInit {
   }
 
   userOrderManager(): void{
-    if (this.user)
+    if (this.userLogin)
     {
-      this.router.navigate([`/home/user-orders`]);
+      this.router.navigate([`/user-orders`]);
     }
     else{
       this.router.navigate([`/auth/sign-in`]);
@@ -44,9 +53,9 @@ export class HeaderComponent implements OnInit {
   }
 
   orderManager(): void{
-    if (this.user)
+    if (this.userLogin)
     {
-      this.router.navigate([`/home/orders`]);
+      this.router.navigate([`/orders`]);
     }
     else{
       this.router.navigate([`/auth/sign-in`]);

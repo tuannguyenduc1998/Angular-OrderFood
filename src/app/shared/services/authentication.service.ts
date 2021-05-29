@@ -17,7 +17,7 @@ export class AuthenticationService extends BaseService implements CanActivate {
     if (this.getAuthenticationModel()) {
       return true;
     }
-    this.router.navigate(['/home'], {
+    this.router.navigate(['/'], {
       queryParams: { returnUrl: state.url }
     });
     return false;

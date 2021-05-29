@@ -17,7 +17,10 @@ const routes: Routes = [
       },
       {
         path: 'store',
-        component: StoreComponent
+        component: StoreComponent,
+        data: {
+          title: 'Store'
+        }
       },
       {
         path: 'product',
@@ -25,7 +28,10 @@ const routes: Routes = [
       },
       {
         path: 'store-order',
-        component: StoreOrderComponent
+        component: StoreOrderComponent,
+        data: {
+          title: 'Store-order'
+        }
       }
     ]
   }

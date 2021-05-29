@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewStoreComponent implements OnInit {
 
-  stores: StoreSummaryModel[];
+  stores: StoreSummaryModel[] = [];
   url = environment.API_ENDPOINT_LOCAL;
   constructor(private storeService: StoreService) {}
 

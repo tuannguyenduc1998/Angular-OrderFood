@@ -17,6 +17,10 @@ export class ProductService extends BaseService {
     super(httpclient);
   }
 
+  public getAllProduct(): Observable<ProductSummaryModel[]>{
+    return this.get<ProductSummaryModel[]>(`/api/products/get-all-product`);
+  }
+
   public listProductPaging(
     params: ProductDataFilter
   ): Observable<PagePagination<ProductSummaryModel>> {

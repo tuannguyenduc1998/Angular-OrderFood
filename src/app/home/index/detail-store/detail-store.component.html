@@ -69,15 +69,15 @@
       </div>
       <div class="list-order col-md-3 pl-0">
         <div class="card">
-          <div class="card-header">
-            <h4 class="username text-center">{{user?.email}}</h4>
+          <div class="card-header d-flex justify-content-between">
+            <h4 class="username text-center">Giỏ hàng của tôi</h4>
+            <div class="delete-all-orderdetail">
+              <a class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
+            </div>
           </div>
+
           <div class="card-body p-2">
             <ng-container *ngFor="let item of orderDetails; let i = index">
-              <div class="delete-all-orderdetail d-flex justify-content-end">
-                <a class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
-              </div>
-
               <div class="item-order row">
                 <div class="info-product-order col-md-8">
                   <div class="product-name font-13 font-weight-bold">

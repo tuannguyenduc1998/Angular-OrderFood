@@ -21,7 +21,7 @@
         </div>
         <button nz-button nzType="primary" type="submit"
           class="text-uppercase d-flex align-items-center justify-content-center mx-1"
-          [routerLink]="['/home/store-manager/product/create']">
+          [routerLink]="['/store-manager/product/create']">
           Tạo mới
         </button>
         <!-- <button nz-button nzType="primary" type="click"
@@ -75,7 +75,7 @@
         <td nzRight>
           <div class="d-flex justify-content-center align-items-center">
             <i nz-icon class="edit-active pointer mr-3" nzType="edit" nzTheme="outline" nz-tooltip nzTooltipTitle="Sửa"
-              [routerLink]="['/home/store-manager/product/edit', item.id]"></i>
+              [routerLink]="['/store-manager/product/edit', item.id]"></i>
               <div class="active-switch pointer" aria-hidden="true" nz-tooltip nzTooltipTitle="Thay đổi trạng thái">
               </div>
               <nz-switch [ngModel]="!item?.isHidden" class="table-icon--switch" nzSize="small"></nz-switch>

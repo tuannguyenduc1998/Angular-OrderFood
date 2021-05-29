@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { AddOrderPopupComponent } from './popups/add-order-popup/add-order-popup.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzButtonModule,
     RouterModule,
     NzLayoutModule,
-    NzModalModule
+    NzModalModule,
+    NzToolTipModule,
+    NzInputModule
   ],
   exports: [
     HeaderComponent,

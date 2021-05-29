@@ -3,6 +3,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-orange: #f4883f;
+  --color-black: #2e2751;
+  --color-white: #fff;
+  --font-family: 'Roboto', sans-serif;
+  --font-16: 16px;
+  --font-15: 15px;
+  --font-13: 13px;
+  --font-14: 14px;
+}
+
+*{
+  font-family: var(--font-family);
+}
+
 .form-control {
     font-size: 13px;
 }

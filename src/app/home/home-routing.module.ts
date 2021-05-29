@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { IndexComponent } from './index/index.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
@@ -28,7 +27,10 @@ const routes: Routes = [
       },
       {
         path: 'user-orders',
-        component: UserOrdersComponent
+        component: UserOrdersComponent,
+        data: {
+          title: 'User-order'
+        }
       },
     ]
   }

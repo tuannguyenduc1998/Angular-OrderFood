@@ -105,7 +105,7 @@ export class StoreComponent implements OnInit {
       this.storeService.createOrUpdate(this.mappingModel(this.storeForm.value)).subscribe(res => {
         if (res)
         {
-          this.router.navigate([`/home/store-manager/store`]);
+          this.router.navigate([`/store-manager/store`]);
         }
       });
     }

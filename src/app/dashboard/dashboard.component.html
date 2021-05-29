@@ -2,7 +2,7 @@
 <nz-layout>
   <nz-sider nzCollapsible>
     <div class="d-flex justify-content-center">
-      <img src="../../../../assets/logo.png" class="logo m-3 pointer" [routerLink]="['/home']">
+      <img src="../../../../assets/logo.png" class="logo m-3 pointer" [routerLink]="['/']">
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-submenu nzTitle="User" nzIcon="user">
@@ -53,7 +53,7 @@
       <ng-container *ngIf="!user">
         <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
       </ng-container>
-      <i nz-icon class="home mx-4 pointer" nzType="home" nzTheme="outline" [routerLink]="['/home']"></i>
+      <i nz-icon class="home mx-4 pointer" nzType="home" nzTheme="outline" [routerLink]="['/']"></i>
       </div>
     </nz-header>
     <nz-content>

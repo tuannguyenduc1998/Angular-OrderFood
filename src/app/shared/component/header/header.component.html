@@ -1,55 +1,57 @@
-<div class="row col-md-12 header mx-0">
-  <div class="col-md-8 d-flex justify-content-start">
-    <img src="../../../../assets/logo.png" class="logo m-2 ml-5" [routerLink]="['/home']">
-    <div class="d-flex align-items-center">
-      <a class="ml-3" (click)="storeManager()">Quản lý của hàng</a>
-      <a class="ml-3" (click)="orderManager()">Đơn hàng của bạn</a>
-      <a class="ml-3" (click)="userOrderManager()">Món đã chọn</a>
-    </div>
-  </div>
-  <div class="col-md-4 d-flex justify-content-end align-items-center">
-    <!-- <ng-container *ngIf="user; else">
-    <a nz-dropdown [nzDropdownMenu]="menu">
-      <a>
-        {{user.fullName}}
-        <i nz-icon nzType="down" class="mb-6"></i>
-      </a>
-    </a>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu class="mt-1">
-        <ng-container *ngIf='user'>
-          <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
-        </ng-container>
-        <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
-        <li nz-menu-item (click)="logOut()">Đăng xuất</li>
-      </ul>
-    </nz-dropdown-menu>
-  </ng-container>
-  <ng-container *ngIf="!user">
-    <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
-  </ng-container> -->
+<div class="header">
+  <div class="container">
+    <div class="row col-md-12 mx-0 px-0 text-uppercase">
+      <div class="col-md-2 d-flex justify-content-start px-0 header-left">
+        <img src="../../../../assets/logo.png" class="logo" [routerLink]="['/']">
+      </div>
 
-  <ng-container *ngIf="user; else userNull">
-    <a nz-dropdown [nzDropdownMenu]="menu">
-      <a>
-        {{user.fullName}}
-        <i nz-icon nzType="down" class="mb-6"></i>
-      </a>
-    </a>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu class="mt-1">
-        <ng-container *ngIf='user'>
-          <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
+      <div class="nav-bar col-md-5 d-flex align-items-center font-weight-bold px-0">
+        <a class="ml-3" (click)="storeManager()">Quản lý cửa hàng</a>
+        <a class="ml-3" (click)="orderManager()">Đơn hàng của bạn</a>
+        <a class="ml-3" (click)="userOrderManager()">Món đã chọn</a>
+      </div>
+
+      <div class="col-md-3 px-0 d-flex align-items-center justify-content-end">
+        <div class="search-area mx-1" nz-tooltip [nzTooltipTitle]="'Tìm kiếm cửa hàng'">
+          <nz-input-group class="search" nzSearch [nzAddOnAfter]="suffixButton">
+            <input type="text" nz-input [placeholder]="
+                  'Tìm kiếm cửa hàng'
+                " />
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSearch>
+              <i nz-icon nzType="search"></i>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="header-right col-md-2 d-flex justify-content-end align-items-center font-weight-bold">
+        <ng-container *ngIf="userLogin; else userNull">
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            <a>
+              <img [src]="url + user?.avatar" alt="" class="avatar">
+              {{user?.fullName}}
+              <i nz-icon nzType="down" class="mb-6"></i>
+            </a>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu class="mt-1">
+              <ng-container *ngIf="user">
+                <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
+              </ng-container>
+              <li nz-menu-item>Tài khoản</li>
+              <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
+              <li nz-menu-item (click)="logOut()">Đăng xuất</li>
+            </ul>
+          </nz-dropdown-menu>
         </ng-container>
-        <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
-        <li nz-menu-item (click)="logOut()">Đăng xuất</li>
-      </ul>
-    </nz-dropdown-menu>
-  </ng-container>
-  <ng-template #userNull>
-    <div>
-      <button nz-button nzType="default" [routerLink]="['/auth/sign-in']" >Đăng nhập</button>
+        <ng-template #userNull>
+          <div class="btn-login">
+            <button nz-button nzType="default" [routerLink]="['/auth/sign-in']">Đăng nhập</button>
+          </div>
+        </ng-template>
+      </div>
     </div>
-  </ng-template>
   </div>
 </div>

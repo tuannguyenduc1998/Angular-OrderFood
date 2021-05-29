@@ -122,7 +122,7 @@ export class ProductFormComponent implements OnInit {
     {
       if (res)
       {
-        this.router.navigate([`/home/store-manager/product/list`]);
+        this.router.navigate([`/store-manager/product/list`]);
         this.nzNotificationService.success('Thông báo', 'Thêm sản phẩm thành công!');
       }
     });

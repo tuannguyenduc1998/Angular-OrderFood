@@ -17,15 +17,24 @@ const routes: Routes = [
       },
       {
         path: 'view',
-        component: OrdersViewComponent
+        component: OrdersViewComponent,
+        data: {
+          title: 'Order-view'
+        }
       },
       {
         path: 'detail/:id',
-        component: OrdersDetailComponent
+        component: OrdersDetailComponent,
+        data: {
+          title: 'Order-detail'
+        }
       },
       {
         path: 'add-order/:id',
-        component: OrdersCreateComponent
+        component: OrdersCreateComponent,
+        data: {
+          title: 'Order-create'
+        }
       }
     ]
   }

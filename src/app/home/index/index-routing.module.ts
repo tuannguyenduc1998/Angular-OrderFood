@@ -15,12 +15,18 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'view-store',
-        component: ViewStoreComponent
+        path: '',
+        component: ViewStoreComponent,
+        data: {
+          title: 'Home'
+        }
       },
       {
         path: 'detail-store/:id',
-        component: DetailStoreComponent
+        component: DetailStoreComponent,
+        data: {
+          title: 'Store-detail'
+        }
       }
     ]
   }
