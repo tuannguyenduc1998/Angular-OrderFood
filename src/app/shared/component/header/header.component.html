@@ -40,7 +40,7 @@
               <ng-container *ngIf="user">
                 <li nz-menu-item [routerLink]="['/dashboard']">Trang admin</li>
               </ng-container>
-              <li nz-menu-item>Tài khoản</li>
+              <li nz-menu-item [routerLink]="['/account']">Tài khoản</li>
               <li nz-menu-item (click)="changePassword()">Thay đổi mật khẩu</li>
               <li nz-menu-item (click)="logOut()">Đăng xuất</li>
             </ul>

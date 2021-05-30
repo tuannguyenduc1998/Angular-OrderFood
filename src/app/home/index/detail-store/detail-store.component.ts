@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AuthenticationModel } from 'src/app/shared/models/auth/authentication.model';
@@ -39,13 +40,15 @@ export class DetailStoreComponent implements OnInit {
   user: UserData;
   orderDetails: OrderDetailSummaryModel[];
   order: OrderSummaryModel;
+  isClickCategory = false;
   constructor(
     private storeService: StoreService,
     private router: ActivatedRoute,
     private productService: ProductService,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private nzNotificationService: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -54,31 +57,41 @@ export class DetailStoreComponent implements OnInit {
     forkJoin([
       this.storeService.getStoreByStoreId(this.id),
       this.productService.getAllCategory(),
-      this.userService.getUserById(this.userLogin.userId),
-      this.orderService.getOrderByStoreIdAndUserId(
-        this.id,
-        this.userLogin.userId
-      ),
-    ]).subscribe(([result1, result2, result3, result4]) => {
+    ]).subscribe(([result1, result2]) => {
       this.store = result1;
       this.categories = result2;
-      this.user = result3;
-      this.order = result4;
-      if (this.order) {
-        this.getApiOrderDetail();
-      }
     });
+
+    if (this.userLogin) {
+      forkJoin([
+        this.userService.getUserById(this.userLogin.userId),
+        this.orderService.getOrderByStoreIdAndUserId(
+          this.id,
+          this.userLogin.userId
+        ),
+      ]).subscribe(([result1, result2]) => {
+        this.user = result1;
+        this.order = result2;
+        if (this.order) {
+          this.getApiOrderDetail();
+        }
+      });
+    }
+
     this.searchTerm$.pipe(debounceTime(200)).subscribe((_) => {
       this.filterModel.keyWord = this.searchTerm$.value.trim();
       this.filterProduct();
     });
   }
 
-  filterProduct(): void {
+  filterProduct(categoryId?: string): void {
     this.filterModel.storeId = this.id;
     const filter = { ...this.filterModel };
     this.productService.getListProductByStoreId(filter).subscribe((res) => {
       this.products = res;
+      if (categoryId){
+        this.products = res.filter((x) => categoryId === x.category.id);
+      }
     });
   }
 
@@ -92,66 +105,77 @@ export class DetailStoreComponent implements OnInit {
       });
   }
 
+  filterCategory(categoryId): void{
+    this.isClickCategory = categoryId;
+    this.filterProduct(categoryId);
+  }
+
   increaseAmount(product): void {
-    let orderForm: any;
-    if (this.orderDetails) {
-      for (const x of [...this.orderDetails]) {
-        if (x.product.id === product.id) {
+    if (this.userLogin) {
+      let orderForm: any;
+      if (this.orderDetails) {
+        for (const x of [...this.orderDetails]) {
+          if (x.product.id === product.id) {
+            orderForm = {
+              orderId: this.order.id,
+              productId: product.id,
+              amount: x.amount + 1,
+            };
+            this.orderService.updateOrderDetail(orderForm).subscribe((res) => {
+              if (res) {
+                this.orderService
+                  .getOrderByStoreIdAndUserId(this.id, this.userLogin.userId)
+                  .subscribe((result) => {
+                    this.order = result;
+                  });
+                this.getApiOrderDetail();
+              }
+            });
+          } else {
+            // tslint:disable-next-line:prefer-const
+            let orderDetails: OrderDetailModel[] = [];
+            orderForm = {
+              orderId: this.order.id,
+              productId: product.id,
+              amount: 1,
+              price: product.price,
+              orderDetailNote: '',
+            };
+            orderDetails.push(orderForm);
+            this.orderService.addOrderDetails(orderDetails).subscribe((res) => {
+              if (res) {
+                this.getApiOrderDetail();
+              }
+            });
+          }
+        }
+
+        if (!this.orderDetails) {
           orderForm = {
-            orderId: this.order.id,
-            productId: product.id,
-            amount: x.amount + 1,
+            userId: this.userLogin.userId,
+            storeId: this.store.id,
+            orderNote: '',
+            orderDetails: [
+              {
+                productId: product.id,
+                amount: 1,
+                price: product.price,
+                orderDetailNote: '',
+              },
+            ],
           };
-          this.orderService.updateOrderDetail(orderForm).subscribe((res) => {
-            if (res) {
-              this.orderService.getOrderByStoreIdAndUserId(
-                this.id,
-                this.userLogin.userId
-              ).subscribe((result) => {
-                this.order = result;
-              });
-              this.getApiOrderDetail();
-            }
-          });
-        } else {
-          // tslint:disable-next-line:prefer-const
-          let orderDetails: OrderDetailModel[] = [];
-          orderForm = {
-            orderId: this.order.id,
-            productId: product.id,
-            amount: 1,
-            price: product.price,
-            orderDetailNote: '',
-          };
-          orderDetails.push(orderForm);
-          this.orderService.addOrderDetails(orderDetails).subscribe((res) => {
+          this.orderService.createOrder(orderForm).subscribe((res) => {
             if (res) {
               this.getApiOrderDetail();
             }
           });
         }
       }
-    }
-
-    if (!this.orderDetails) {
-      orderForm = {
-        userId: this.userLogin.userId,
-        storeId: this.store.id,
-        orderNote: '',
-        orderDetails: [
-          {
-            productId: product.id,
-            amount: 1,
-            price: product.price,
-            orderDetailNote: '',
-          },
-        ],
-      };
-      this.orderService.createOrder(orderForm).subscribe((res) => {
-        if (res) {
-          this.getApiOrderDetail();
-        }
-      });
+    } else {
+      this.nzNotificationService.warning(
+        'Thông báo',
+        'Vui lòng đăng nhập trước khi đặt hàng!'
+      );
     }
   }
 
@@ -188,45 +212,21 @@ export class DetailStoreComponent implements OnInit {
     }
   }
 
-  deleteAll(): void{
+  deleteAll(): void {
     const orderDetailForm: any[] = [];
     for (const x of [...this.orderDetails]) {
       const orderDetail = {
         orderId: this.order.id,
-        productId: x.product.id
+        productId: x.product.id,
       };
       orderDetailForm.push(orderDetail);
     }
-    this.orderService.deleteAllOrderDetail(orderDetailForm).subscribe((result) => {
-      if (result) {
-        this.getApiOrderDetail();
-      }
-    });
+    this.orderService
+      .deleteAllOrderDetail(orderDetailForm)
+      .subscribe((result) => {
+        if (result) {
+          this.getApiOrderDetail();
+        }
+      });
   }
-
-  // increaseAmount(item): void {
-  //   let checkProduct = false;
-  //   if (this.listOrderDetail.length > 0) {
-  //     for (const x of [...this.listOrderDetail]) {
-  //       if (x.productId === item.id) {
-  //         checkProduct = true;
-  //         x.amount += 1;
-  //         x.price = item.price * x.amount;
-  //       }
-  //     }
-  //   }
-
-  //   if (this.listOrderDetail.length === 0 || checkProduct === false) {
-  //     const orderDetail = {
-  //       productId: item.id,
-  //       productName: item.productName,
-  //       price: item.price,
-  //       amount: 1,
-  //       OrderDetailNote: '',
-  //     };
-  //     this.listOrderDetail.push(orderDetail);
-  //   }
-  //   this.totalPrice = 0;
-  //   this.listOrderDetail.forEach((x) => (this.totalPrice += x.price));
-  // }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
           title: 'User-order'
         }
       },
+      {
+        path: 'account',
+        loadChildren: () => import('./profile-manager/profile-manager.module').then(mod => mod.ProfileManagerModule)
+      }
     ]
   }
 ];

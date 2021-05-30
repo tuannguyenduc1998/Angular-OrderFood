@@ -11,6 +11,11 @@
     a{
       color: var(--color-black);
       position: relative;
+
+      &:hover{
+        color: var(--color-orange);
+        transition: width 0.3s ease-out;
+      }
     }
 
     a::after{

@@ -3,10 +3,16 @@
     <div class="col-md-5 px-0">
       <img [src]="url + store?.storeAvatar" alt="" class="avatar-store">
     </div>
-    <div class="col-md-7">
-      <h1 class="name-store">{{store?.storeName}}</h1>
-      <div class="address-store">{{store?.storeAddress}}</div>
-      <span class="status-store">{{store?.storeState ? 'Mở cửa' : 'Đóng cửa'}}</span>
+    <div class="col-md-7 store-info pl-5">
+      <h1 class="name-store font-weight-bold">{{store?.storeName}}</h1>
+      <div class="address-store">
+        <i class="fas fa-map-marker-alt mr-1 text-danger"></i>
+        {{store?.storeAddress}}
+      </div>
+      <span class="status-store">
+        <i class="fa fa-circle mr-1" aria-hidden="true"></i>
+        {{store?.storeState ? 'Mở cửa' : 'Đóng cửa'}}
+      </span>
     </div>
   </div>
 </div>
@@ -21,7 +27,9 @@
         <div class="card">
           <div class="card-body">
             <ul *ngFor="let category of categories" class="list-unstyled">
-              <li class="text-uppercase">{{category.categoryName}}</li>
+              <li [class.category-active]="isClickCategory === category.id" class="category-item text-uppercase" (click)="filterCategory(category.id)">
+                <a class="category-name text-decoration-none">{{category.categoryName}}</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -72,7 +80,7 @@
           <div class="card-header d-flex justify-content-between">
             <h4 class="username text-center">Giỏ hàng của tôi</h4>
             <div class="delete-all-orderdetail">
-              <a class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
+              <a *ngIf="userLogin" class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
             </div>
           </div>
 

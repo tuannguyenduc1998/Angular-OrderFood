@@ -46,7 +46,7 @@
         &:hover > i{
           background-color: var(--color-orange);
           color: var(--color-white);
-          transition: 0.3s ease-out;
+          transition: 0.5s ease-out;
         }
       }
     }
@@ -70,8 +70,20 @@
   .contact-connect {
     .connect-icon{
       i {
-        color: var(--color-white);
+        color: var(--color-orange);
         font-size: var(--font-16);
+        background-color: var(--color-white);;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+
+        &:hover {
+          background-color: var(--color-orange);
+          color: var(--color-white);
+          transition: 0.5s ease-out;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -89,7 +101,6 @@
 
   .copyright {
     color: var(--color-white);
-    position: relative;
-    z-index: 2;
+    border-top: 2px solid #d4d4d4;
   }
 }

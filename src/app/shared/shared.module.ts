@@ -18,6 +18,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,7 +41,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzBreadCrumbModule,
     NzNotificationModule,
     NzInputNumberModule,
-    NzModalModule
+    NzModalModule,
+    NzDatePickerModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -61,7 +63,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzBreadCrumbModule,
     NzNotificationModule,
     NzInputNumberModule,
-    NzModalModule
+    NzModalModule,
+    NzDatePickerModule
   ],
   providers: [],
 })

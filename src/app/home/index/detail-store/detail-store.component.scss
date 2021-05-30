@@ -15,6 +15,25 @@
   object-fit: cover;
 }
 
+.store-info{
+  .address-store {
+    font-size: var(--font-15);
+  }
+
+  .status-store {
+    font-size: var(--font-15);
+  }
+}
+
+.category-active {
+  background-color: var(--color-orange);
+  padding: 4px;
+  border-radius: 5px;
+  .category-name {
+    color: var(--color-white);
+  }
+}
+
 .avatar {
   img{
     width: 60px;
@@ -24,6 +43,17 @@
 }
 .menu-store {
   background-color: #f2f2f2;
+
+  .menu-store-content {
+    .categories {
+      .category-item{
+        cursor: pointer;
+        .category-name {
+          color: #d4d4d4;
+        }
+      }
+    }
+  }
 
   .menu-store-tab {
     .name-tab {

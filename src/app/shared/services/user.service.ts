@@ -45,10 +45,9 @@ export class UserService extends BaseService {
     if (!paramsFilter.keyWord) {
       delete paramsFilter.keyWord;
     }
-    const httpOptions = this.getHeaders();
     return this.get(
       `/api/users/list-user-paging`,
-      Utils.createFilterParam({ ...paramsFilter }), httpOptions
+      Utils.createFilterParam({ ...paramsFilter }), this.getHeaders()
     ).pipe(
       map((result: any) => {
         return result;
@@ -58,5 +57,9 @@ export class UserService extends BaseService {
 
   public getUserById(userId): Observable<UserData>{
     return this.get<UserData>(`/api/users/${userId}`);
+  }
+
+  public updateProfile(userForm): Observable<any>{
+    return this.put<any>(`/api/users/update-profile`, userForm, this.getHeaders());
   }
 }
