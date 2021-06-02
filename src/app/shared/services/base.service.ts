@@ -18,10 +18,6 @@ export class BaseService {
 
   private loggedInStatus = JSON.parse(localStorage.getItem('OrderFoodApi'));
   getHeaders(): any{
-    // const httpOptions = {
-    //   headers: new HttpHeaders({ 'Content-Type': type , Authorization:
-    //   `Bearer ${this.loggedInStatus.accessToken}`})
-    // };
     const httpOptions = new HttpHeaders().set( 'Authorization', `Bearer ${this.loggedInStatus.accessToken}`);
     return httpOptions;
   }

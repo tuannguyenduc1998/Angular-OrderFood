@@ -96,9 +96,9 @@ export class ProfileManagerFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.userService.updateProfile(this.userForm.value).subscribe((result) => {
+    this.userService.updateProfile(this.mappingData(this.userForm.value)).subscribe((result) => {
       if (result){
-        this.nzNotificationService.success('Thông báo', 'Cập nhật thông tin cá nhân thành công!');
+        this.nzNotificationService.success('Thông báo', 'Cập nhật thông tin cá nhân thành công!', { nzPlacement: 'bottomRight'});
       }
     });
   }
@@ -108,6 +108,7 @@ export class ProfileManagerFormComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       this.fileService.uploadFile(file).subscribe((res) => {
+        this.userForm.controls.avatar.setValue(res.data);
         this.user.avatar = res.data;
       });
     }

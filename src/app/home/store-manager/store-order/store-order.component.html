@@ -7,7 +7,7 @@
   <div class="mx-0 ml-auto d-flex">
     <div class="ml-auto d-flex flex-wrap w-100">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex form-inline pl-0 pr-0">
-        <div class="search-area mx-1" nz-tooltip [nzTooltipTitle]="'Tìm theo tên, email'">
+        <div class="search-area mx-1" nz-tooltip nzTooltipTitle="Tìm theo tên, email" nzTooltipPlacement="bottomLeft">
           <nz-input-group class="search" nzSearch [nzAddOnAfter]="suffixButton">
             <input type="text" nz-input [placeholder]="
                   'Tìm theo tên, email'
@@ -41,11 +41,8 @@
         <th class="table-col-avatar">
           <p class="mb-0">Tổng tiền</p>
         </th>
-        <th class="table-col-status">
+        <th class="table-col-status" nzRight>
           <p class="mb-0">Trạng thái</p>
-        </th>
-        <th nzRight class="table-col-manipulation text-center">
-          <p class="mb-0">Thao tác</p>
         </th>
       </tr>
     </thead>
@@ -55,14 +52,7 @@
         <td>{{item.user.fullName}}</td>
         <td>{{convertTime(item.orderDate) | date: 'dd/MM/yyyy'}}</td>
         <td>{{item.totalPrice | currency: 'VND'}}</td>
-        <td>{{convertState(item.orderState)}}</td>
-        <td nzRight>
-          <div class="d-flex justify-content-center align-items-center">
-              <div class="active-switch pointer" aria-hidden="true" nz-tooltip nzTooltipTitle="Thay đổi trạng thái">
-              </div>
-              <nz-switch [ngModel]="item?.orderState" class="table-icon--switch" nzSize="small"></nz-switch>
-          </div>
-        </td>
+        <td nzRight>{{convertState(item.orderState)}}</td>
       </tr>
     </tbody>
   </nz-table>

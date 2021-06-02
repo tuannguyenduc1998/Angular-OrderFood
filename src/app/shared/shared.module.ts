@@ -19,6 +19,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 @NgModule({
   declarations: [],
   imports: [
@@ -42,7 +44,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzNotificationModule,
     NzInputNumberModule,
     NzModalModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzBackTopModule,
+    NzSpinModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -64,7 +68,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzNotificationModule,
     NzInputNumberModule,
     NzModalModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzBackTopModule,
+    NzSpinModule
   ],
   providers: [],
 })

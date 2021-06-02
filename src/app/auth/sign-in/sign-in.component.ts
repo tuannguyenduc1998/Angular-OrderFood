@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ForgotPasswordPopupComponent } from 'src/app/shared/component/popups/forgot-password-popup/forgot-password-popup.component';
 import ValidationHelper from 'src/app/shared/helpers/validation.helper';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
@@ -20,7 +23,9 @@ export class SignInComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private notificationService: NzNotificationService,
+    private modalService: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +57,26 @@ export class SignInComponent implements OnInit {
           this.router.navigate(['/']);
         });
     } else {
-      alert('Tài khoản hoặc hoặc mật khẩu không đúng');
+      this.notificationService.error(
+        'Thông báo',
+        'Tài khoản hoặc mật khẩu không đúng!',
+        { nzPlacement: 'bottomRight' }
+      );
     }
+  }
+
+  forgotPassword(): void {
+    const modal = this.modalService.create({
+      nzContent: ForgotPasswordPopupComponent
+    });
+    modal.afterClose.subscribe((result) => {
+      if (result && result.isSuccess){
+        this.notificationService.success(
+          'Thông báo',
+          'Vui lòng kiểm tra email để xác nhận!',
+          { nzPlacement: 'bottomRight' }
+        );
+      }
+    });
   }
 }

@@ -174,7 +174,8 @@ export class DetailStoreComponent implements OnInit {
     } else {
       this.nzNotificationService.warning(
         'Thông báo',
-        'Vui lòng đăng nhập trước khi đặt hàng!'
+        'Vui lòng đăng nhập trước khi đặt hàng!',
+        { nzPlacement: 'bottomRight'}
       );
     }
   }

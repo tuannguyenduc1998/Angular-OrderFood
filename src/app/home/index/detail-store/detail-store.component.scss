@@ -46,10 +46,11 @@
 
   .menu-store-content {
     .categories {
+      padding-right: 0px;
       .category-item{
         cursor: pointer;
         .category-name {
-          color: #d4d4d4;
+          color: var(--color-black);
         }
       }
     }
@@ -94,6 +95,7 @@
 }
 
 .list-order {
+  padding-left: 0px;
   .card-body {
     width: 100%;
 
@@ -138,5 +140,24 @@
   }
 
 
+}
+
+@media screen and (max-width: 770px){
+  .list-order {
+    padding-left: 15px;
+  }
+
+  .list-product {
+    margin-bottom: 1rem;
+  }
+
+  .menu-store {
+    .menu-store-content {
+      .categories {
+        padding-right: 15px;
+        margin-bottom: 1rem;
+      }
+    }
+  }
 }
 

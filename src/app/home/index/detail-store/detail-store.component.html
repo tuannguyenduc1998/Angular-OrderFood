@@ -1,15 +1,15 @@
-<div class="container">
-  <div class="row mx-0 my-3">
-    <div class="col-md-5 px-0">
+<div class="container m-p-header">
+  <div class="row mx-0 mb-3">
+    <div class="col-md-5 col-12 px-0">
       <img [src]="url + store?.storeAvatar" alt="" class="avatar-store">
     </div>
-    <div class="col-md-7 store-info pl-5">
+    <div class="col-md-7 col-12 store-info pl-5">
       <h1 class="name-store font-weight-bold">{{store?.storeName}}</h1>
       <div class="address-store">
         <i class="fas fa-map-marker-alt mr-1 text-danger"></i>
         {{store?.storeAddress}}
       </div>
-      <span class="status-store">
+      <span class="status-store" [class.text-success]="store?.storeState" [class.text-dark]="!store?.storeState">
         <i class="fa fa-circle mr-1" aria-hidden="true"></i>
         {{store?.storeState ? 'Mở cửa' : 'Đóng cửa'}}
       </span>
@@ -23,22 +23,23 @@
       <h4 class="name-tab text-uppercase font-16 font-weight-bold">thực đơn</h4>
     </div>
     <div class="menu-store-content row">
-      <div class="categories col-md-2 pr-0">
+      <div class="categories col-md-2 col-12">
         <div class="card">
           <div class="card-body">
             <ul *ngFor="let category of categories" class="list-unstyled">
-              <li [class.category-active]="isClickCategory === category.id" class="category-item text-uppercase" (click)="filterCategory(category.id)">
+              <li [class.category-active]="isClickCategory === category.id" class="category-item text-uppercase"
+                (click)="filterCategory(category.id)">
                 <a class="category-name text-decoration-none">{{category.categoryName}}</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="list-product col-md-7">
+      <div class="list-product col-md-7 col-7 col-12">
         <div class="card">
           <div class="card-body">
-            <div class="col-md-12 py-3 px-2">
-              <div class="search-area" nz-tooltip [nzTooltipTitle]="'Tìm theo tên sản phẩm'">
+            <div class="col-md-12 col-12 py-3 px-2">
+              <div class="search-area" nz-tooltip nzTooltipTitle="Tìm theo tên sản phẩm">
                 <nz-input-group class="" nzSearch [nzAddOnAfter]="suffixButton">
                   <input class="font-16" type="text" nz-input [placeholder]="
                       'Tìm theo tên sản phẩm'
@@ -75,19 +76,19 @@
           </div>
         </div>
       </div>
-      <div class="list-order col-md-3 pl-0">
+      <div class="list-order col-md-3 col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4 class="username text-center">Giỏ hàng của tôi</h4>
             <div class="delete-all-orderdetail">
-              <a *ngIf="userLogin" class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
+              <a *ngIf="orderDetails" class="font-13 text-decoration-none" (click)="deleteAll()">Xóa tất cả</a>
             </div>
           </div>
 
           <div class="card-body p-2">
             <ng-container *ngFor="let item of orderDetails; let i = index">
               <div class="item-order row">
-                <div class="info-product-order col-md-8">
+                <div class="info-product-order col-md-8 col-8">
                   <div class="product-name font-13 font-weight-bold">
                     {{item.product.productName}}
                   </div>
@@ -95,7 +96,7 @@
                     {{item.price | currency: 'VND'}}
                   </div>
                 </div>
-                <div class="btn-group col-md-4">
+                <div class="btn-group col-md-4 col-4" >
                   <a class="btn-descrease" (click)="decreaseAmount(item.product, item.amount)">
                     <i class="fas fa-minus-circle"></i>
                   </a>
@@ -104,7 +105,7 @@
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 </div>
-                <div class="note col-md-12">
+                <div class="note col-md-12 col-12">
                   <input type="text" placeholder="Thêm ghi chú" class="border-0 font-13">
                 </div>
               </div>
@@ -116,7 +117,7 @@
             </div>
           </div>
           <div class="card-footer row mx-0">
-            <a class="col-md-12 text-center btn btn-danger font-16">
+            <a class="col-md-12 col-12 text-center btn btn-danger font-16">
               <i class="fas fa-check-circle"></i>
               Đặt hàng
             </a>

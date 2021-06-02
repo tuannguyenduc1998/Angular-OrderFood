@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container m-p-header">
   <form [formGroup]="userForm" class="form-content" *ngIf="userForm" (ngSubmit)="onSubmit()">
     <div class="row mx-0 my-3">
-      <div class="col-md-6 d-flex align-items-center">
+      <div class="col-md-6 d-flex align-items-center px-0">
         <h4 class="text-uppercase font-weight-bold primary-color mb-0">
           thông tin cá nhân
         </h4>
@@ -21,6 +21,25 @@
           [class.is-invalid]="formErrors?.fullName">
       </div>
       <p class="warning text-danger">{{formErrors?.fullName}}</p>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-12">Ảnh đại diện</label>
+      <div class="upload-image col-md-12">
+        <input #upload class="upload" type='file' (change)="onSelectFile($event)" name="avatar"
+          accept=".jpg, .jpeg, .png">
+          <input type="hidden" name="fileHidden" formControlName="avatar"/>
+        <div class="display-img" *ngIf="user.avatar">
+          <img [src]="url + user.avatar" class="img">
+          <i class="icon-delete-image" nz-icon nzType="close" nzTheme="outline" (click)="removeImg()"></i>
+        </div>
+        <ng-container *ngIf="!user.avatar">
+          <div class="perspective-image" (click)="upload.click()">
+            <i nz-icon nzType="file-add" nzTheme="outline"></i>
+          </div>
+        </ng-container>
+      </div>
+      <p class="warning text-danger">{{formErrors?.avatar}}</p>
     </div>
 
     <div class="form-group row">
@@ -68,24 +87,6 @@
         </nz-date-picker>
       </div>
       <p class="warning text-danger">{{formErrors?.dateOfBirth}}</p>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-md-12">Ảnh đại diện</label>
-      <div class="upload-image col-md-12">
-        <input #upload class="upload" type='file' (change)="onSelectFile($event)" name="avatar"
-          accept=".jpg, .jpeg, .png">
-        <div class="display-img" *ngIf="user.avatar">
-          <img [src]="url + user.avatar" class="img">
-          <i class="icon-delete-image" nz-icon nzType="close" nzTheme="outline" (click)="removeImg()"></i>
-        </div>
-        <ng-container *ngIf="!user.avatar">
-          <div class="perspective-image" (click)="upload.click()">
-            <i nz-icon nzType="file-add" nzTheme="outline"></i>
-          </div>
-        </ng-container>
-      </div>
-      <p class="warning text-danger">{{formErrors?.avatar}}</p>
     </div>
   </form>
 </div>

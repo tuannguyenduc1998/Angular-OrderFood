@@ -11,12 +11,17 @@ import { AddOrderPopupComponent } from './popups/add-order-popup/add-order-popup
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangePasswordPopupComponent } from './popups/change-password-popup/change-password-popup.component';
+import { ForgotPasswordPopupComponent } from './popups/forgot-password-popup/forgot-password-popup.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    AddOrderPopupComponent
+    AddOrderPopupComponent,
+    ChangePasswordPopupComponent,
+    ForgotPasswordPopupComponent
   ],
   imports: [
     CommonModule,
@@ -27,14 +32,18 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzLayoutModule,
     NzModalModule,
     NzToolTipModule,
-    NzInputModule
+    NzInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ChangePasswordPopupComponent
   ],
   entryComponents: [
-    AddOrderPopupComponent
+    AddOrderPopupComponent,
+    ChangePasswordPopupComponent
   ]
 })
 export class ComponentModule { }

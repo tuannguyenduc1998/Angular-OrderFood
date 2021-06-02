@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
 *{
   box-sizing: border-box;
 }
@@ -16,6 +18,12 @@
 
 body{
   font-family: var(--font-family);
+  color: var(--color-black);
+}
+
+.m-p-header {
+  margin-top: 80px;
+  padding-top: 10px;
 }
 
 .form-control {
@@ -31,8 +39,6 @@ button {
     padding-top: 2px;
     font-size: 100%;
 }
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
 
 html {
   font-size: 13px;
@@ -113,4 +119,33 @@ html {
 
 .visibility-hidden {
   visibility: hidden;
+}
+
+.ant-spin-spinning {
+  max-height: unset !important;
+}
+
+.ant-spin-spinning {
+  max-height: unset !important;
+}
+
+.ant-spin-nested-loading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+::ng-deep {
+  .cdk-overlay-container {
+    position: fixed;
+    z-index: 2000;
   }
+
+  .ant-table-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+}

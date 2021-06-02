@@ -1,0 +1,8 @@
+:host ::ng-deep .long-div {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+:host ::ng-deep .long-div-inner {
+  height: 1500px;
+}

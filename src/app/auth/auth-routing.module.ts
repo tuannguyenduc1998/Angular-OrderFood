@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'sign-up',
         component: SignUpComponent
+      },
+      {
+        path: 'reset-password/:token',
+        component: ResetPasswordComponent
       }
     ]
   }
