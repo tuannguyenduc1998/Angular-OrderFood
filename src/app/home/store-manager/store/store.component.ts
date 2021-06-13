@@ -121,8 +121,8 @@ export class StoreComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       this.fileService.uploadFile(file).subscribe((res) => {
+        this.storeForm.controls.storeAvatar.setValue(res.data);
         this.store.storeAvatar = res.data;
-        this.storeForm.value.storeAvatar = res.data;
       });
     }
   }
