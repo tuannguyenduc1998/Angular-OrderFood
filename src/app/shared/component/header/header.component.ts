@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { environment } from 'src/environments/environment';
 import { AuthenticationModel } from '../../models/auth/authentication.model';
 import { AuthenticationService } from '../../services/authentication.service';
+import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
 import { ChangePasswordPopupComponent } from '../popups/change-password-popup/change-password-popup.component';
 
@@ -15,12 +16,14 @@ import { ChangePasswordPopupComponent } from '../popups/change-password-popup/ch
 export class HeaderComponent implements OnInit {
   userLogin: AuthenticationModel;
   user: any;
+  role: any[] = [];
   url = environment.API_ENDPOINT_LOCAL;
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private userService: UserService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private roleService: RoleService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +33,9 @@ export class HeaderComponent implements OnInit {
         .getUserById(this.userLogin.userId)
         .subscribe((result) => {
           this.user = result;
+          this.roleService.GetRoleByUserId(this.user.id).subscribe((res) => {
+            this.role = res.filter((x) => x.roleName === 'Admin');
+          });
         });
     }
   }

@@ -17,9 +17,9 @@
     </div>
     <div class="content col-md-12 col-12 mt-3">
       <div class="form row">
-        <div class="col-md-4 col-12 p-4" *ngFor='let item of stores'>
+        <div class="col-md-4 col-12 p-4" *ngFor='let item of stores' [routerLink]="['/home/detail-store', item.id]">
           <nz-card nzHoverable [nzCover]="coverTemplate">
-            <nz-card-meta [routerLink]="['/index/detail-store', item.id]" nzTitle={{item.storeName}}
+            <nz-card-meta nzTitle={{item.storeName}}
               nzDescription={{item.storeAddress}}></nz-card-meta>
           </nz-card>
           <ng-template #coverTemplate>

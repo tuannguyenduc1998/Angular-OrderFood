@@ -11,38 +11,46 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'index',
-        pathMatch: 'full'
+        redirectTo: '',
+        pathMatch: 'full',
       },
       {
-        path: 'index',
-        loadChildren: () => import('./index/index.module').then(mod => mod.IndexModule)
+        path: '',
+        loadChildren: () =>
+          import('./index/index.module').then((mod) => mod.IndexModule),
       },
       {
         path: 'store-manager',
-        loadChildren: () => import('./store-manager/store-manager.module').then(mod => mod.StoreManagerModule)
+        loadChildren: () =>
+          import('./store-manager/store-manager.module').then(
+            (mod) => mod.StoreManagerModule
+          ),
       },
       {
         path: 'orders',
-        loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule)
+        loadChildren: () =>
+          import('./orders/orders.module').then((mod) => mod.OrdersModule),
       },
       {
         path: 'user-orders',
         component: UserOrdersComponent,
         data: {
-          title: 'User-order'
-        }
+          title: 'User-order',
+        },
       },
       {
         path: 'account',
-        loadChildren: () => import('./profile-manager/profile-manager.module').then(mod => mod.ProfileManagerModule)
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./profile-manager/profile-manager.module').then(
+            (mod) => mod.ProfileManagerModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

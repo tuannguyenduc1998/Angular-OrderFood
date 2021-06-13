@@ -11,29 +11,29 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'view-store',
-        pathMatch: 'full'
+        redirectTo: 'home',
+        pathMatch: 'full',
       },
       {
-        path: '',
+        path: 'home',
         component: ViewStoreComponent,
         data: {
-          title: 'Home'
-        }
+          title: 'Home',
+        },
       },
       {
         path: 'detail-store/:id',
         component: DetailStoreComponent,
         data: {
-          title: 'Store-detail'
-        }
-      }
-    ]
-  }
+          title: 'Store-detail',
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class IndexRoutingModule { }
+export class IndexRoutingModule {}

@@ -8,31 +8,31 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 const routes: Routes = [
   {
     path: '',
-    component: AuthComponent,
+    component: AuthComponent, // điểm đánh dấu để active các child component
     children: [
       {
         path: '',
         redirectTo: 'sign-in',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'sign-in',
-        component: SignInComponent
+        component: SignInComponent,
       },
       {
         path: 'sign-up',
-        component: SignUpComponent
+        component: SignUpComponent,
       },
       {
         path: 'reset-password/:token',
-        component: ResetPasswordComponent
-      }
-    ]
-  }
+        component: ResetPasswordComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

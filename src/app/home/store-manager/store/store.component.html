@@ -34,6 +34,7 @@
     <div class="upload-image col-md-12">
       <input #upload class="upload" type='file' (change)="onSelectFile($event)" name="avatar"
         accept=".jpg, .jpeg, .png">
+      <input type="hidden" name="fileHidden" formControlName="storeAvatar"/>
       <div class="display-img" *ngIf="store.storeAvatar">
         <img [src]="url + store.storeAvatar" class="img">
         <i class="icon-delete-image" nz-icon nzType="close" nzTheme="outline" (click)="removeImg()"></i>

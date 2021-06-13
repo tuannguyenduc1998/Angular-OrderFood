@@ -63,19 +63,7 @@ export class DetailStoreComponent implements OnInit {
     });
 
     if (this.userLogin) {
-      forkJoin([
-        this.userService.getUserById(this.userLogin.userId),
-        this.orderService.getOrderByStoreIdAndUserId(
-          this.id,
-          this.userLogin.userId
-        ),
-      ]).subscribe(([result1, result2]) => {
-        this.user = result1;
-        this.order = result2;
-        if (this.order) {
-          this.getApiOrderDetail();
-        }
-      });
+      this.getApiForLogined();
     }
 
     this.searchTerm$.pipe(debounceTime(200)).subscribe((_) => {
@@ -89,8 +77,24 @@ export class DetailStoreComponent implements OnInit {
     const filter = { ...this.filterModel };
     this.productService.getListProductByStoreId(filter).subscribe((res) => {
       this.products = res;
-      if (categoryId){
+      if (categoryId) {
         this.products = res.filter((x) => categoryId === x.category.id);
+      }
+    });
+  }
+
+  getApiForLogined(): void {
+    forkJoin([
+      this.userService.getUserById(this.userLogin.userId),
+      this.orderService.getOrderByStoreIdAndUserId(
+        this.id,
+        this.userLogin.userId
+      ),
+    ]).subscribe(([result1, result2]) => {
+      this.user = result1;
+      this.order = result2;
+      if (this.order) {
+        this.getApiOrderDetail();
       }
     });
   }
@@ -105,7 +109,7 @@ export class DetailStoreComponent implements OnInit {
       });
   }
 
-  filterCategory(categoryId): void{
+  filterCategory(categoryId): void {
     this.isClickCategory = categoryId;
     this.filterProduct(categoryId);
   }
@@ -175,7 +179,7 @@ export class DetailStoreComponent implements OnInit {
       this.nzNotificationService.warning(
         'Thông báo',
         'Vui lòng đăng nhập trước khi đặt hàng!',
-        { nzPlacement: 'bottomRight'}
+        { nzPlacement: 'bottomRight' }
       );
     }
   }
@@ -229,5 +233,36 @@ export class DetailStoreComponent implements OnInit {
           this.getApiOrderDetail();
         }
       });
+  }
+
+  closeOrder(): void {
+    if (this.orderDetails != null) {
+      const changeForm = {
+        orderId: this.order.id,
+        orderState: 2,
+      };
+      this.orderService.changeStatus(changeForm).subscribe((result) => {
+        if (result) {
+          this.nzNotificationService.success(
+            'Thông báo',
+            `Chốt đơn hàng số ${this.order.orderCode} thành công!`,
+            { nzPlacement: 'bottomRight' }
+          );
+          this.getApiForLogined();
+        } else {
+          this.nzNotificationService.error(
+            'Thông báo',
+            'Có lỗi xảy ra. Vui lòng kiểm tra lại!',
+            { nzPlacement: 'bottomRight' }
+          );
+        }
+      });
+    } else {
+      this.nzNotificationService.warning(
+        'Thông báo',
+        'Vui lòng chọn món trước khi đặt hàng!',
+        { nzPlacement: 'bottomRight' }
+      );
+    }
   }
 }
