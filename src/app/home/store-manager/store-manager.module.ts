@@ -7,10 +7,11 @@ import { ProductComponent } from './product/product.component';
 import { StoreOrderComponent } from './store-order/store-order.component';
 import { StoreManagerComponent } from './store-manager.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
-  declarations: [StoreManagerComponent, StoreComponent, StoreOrderComponent],
+  declarations: [StoreManagerComponent, StoreComponent, StoreOrderComponent, CategoryComponent],
   imports: [
     CommonModule,
     StoreManagerRoutingModule,

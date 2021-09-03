@@ -5,10 +5,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { forkJoin } from 'rxjs';
 import ValidationHelper from 'src/app/shared/helpers/validation.helper';
 import { AuthenticationModel } from 'src/app/shared/models/auth/authentication.model';
-import {
-  StoreModel,
-  StoreSummaryModel,
-} from 'src/app/shared/models/store/store.model';
+import { StoreModel, StoreSummaryModel } from 'src/app/shared/models/store/store.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { FileService } from 'src/app/shared/services/file.service';
 import { StoreService } from 'src/app/shared/services/store.service';
@@ -29,7 +26,7 @@ export class StoreComponent implements OnInit {
     storeOwner: '',
     storeAvatar: '',
     storeAddress: '',
-    storeState: '',
+    storeState: ''
   };
   isSubmit: boolean;
   url = environment.API_ENDPOINT_LOCAL;
@@ -44,27 +41,23 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLogin = this.authenticationService.getAuthenticationModel();
-    this.storeService
-      .getStoreByUserId(this.userLogin.userId)
-      .subscribe((res) => {
-        if (res) {
-          this.store = res;
-        }
-        this.createForm();
-      });
+    this.storeService.getStoreByUserId(this.userLogin.userId).subscribe(res => {
+      if (res)
+      {
+        this.store = res;
+      }
+      this.createForm();
+    });
   }
 
   createForm(): void {
-    this.storeForm = this.formBuilder.group({
-      storeName: [this.store.storeName, Validators.required],
-      storeOwner: [this.userLogin.fullName, Validators.required],
-      storeAvatar: [this.store.storeAvatar, Validators.required],
-      storeAddress: [this.store.storeAddress, Validators.required],
-      storeState: [
-        this.store.storeState ? 'Kích hoạt' : 'Chưa đăng kí',
-        Validators.required,
-      ],
-    });
+      this.storeForm = this.formBuilder.group({
+        storeName: [this.store.storeName, Validators.required],
+        storeOwner: [this.userLogin.fullName , Validators.required],
+        storeAvatar: [this.store.storeAvatar, Validators.required],
+        storeAddress: [this.store.storeAddress, Validators.required],
+        storeState: [this.store.storeState ? 'Kích hoạt' : 'Chưa đăng kí', Validators.required]
+      });
   }
 
   // mappingStore(): StoreSummaryModel{
@@ -78,20 +71,22 @@ export class StoreComponent implements OnInit {
   //   };
   // }
 
-  mappingModel(form): any {
-    if (this.store.id) {
+  mappingModel(form): any{
+    if (this.store.id)
+    {
       return {
         storeId: this.store.id,
         storeName: form.storeName,
         storeAvatar: form.storeAvatar,
-        storeAddress: form.storeAddress,
+        storeAddress: form.storeAddress
       };
-    } else {
+    }
+    else{
       return {
         storeName: form.storeName,
         storeOwner: this.userLogin.userId,
         storeAvatar: form.storeAvatar,
-        storeAddress: form.storeAddress,
+        storeAddress: form.storeAddress
       };
     }
   }
@@ -104,15 +99,15 @@ export class StoreComponent implements OnInit {
     return this.invalidMessages.length === 0;
   }
 
-  onSubmit(): void {
-    if (this.validateForm()) {
-      this.storeService
-        .createOrUpdate(this.mappingModel(this.storeForm.value))
-        .subscribe((res) => {
-          if (res) {
-            this.router.navigate([`/store-manager/store`]);
-          }
-        });
+  onSubmit(): void{
+    if (this.validateForm())
+    {
+      this.storeService.createOrUpdate(this.mappingModel(this.storeForm.value)).subscribe(res => {
+        if (res)
+        {
+          this.router.navigate([`/store-manager/store`]);
+        }
+      });
     }
   }
 
@@ -121,13 +116,12 @@ export class StoreComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       this.fileService.uploadFile(file).subscribe((res) => {
-        this.storeForm.controls.storeAvatar.setValue(res.data);
         this.store.storeAvatar = res.data;
       });
     }
   }
 
-  removeImg(): void {
+  removeImg(): void{
     this.store.storeAvatar = '';
   }
 }
